@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_bottom_home"
+        android:icon="@drawable/home_selector"
+        android:title="@string/home"></item>
+
+    <item
+        android:id="@+id/menu_bottom_system"
+        android:icon="@drawable/system_selector"
+        android:title="@string/system"></item>
+
+    <item
+        android:id="@+id/menu_bottom_project"
+        android:icon="@drawable/project_selector"
+        android:title="@string/project"></item>
+
+    <item
+        android:id="@+id/menu_bottom_wx"
+        android:icon="@drawable/wx_selector"
+        android:title="@string/wx"></item>
+
+</menu>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_head_height"
+        android:background="@color/common_baseBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_menu_button_padding"
+        android:src="@drawable/user_back_selector"
+        app:layout_constraintBottom_toBottomOf="@id/head"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/head" />
+
+    <TextView
+        android:id="@id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:text="@string/common_settings"
+        android:textColor="@color/common_baseTextColor"
+        app:layout_constraintBottom_toBottomOf="@id/head"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/head" />
+
+    <Button
+        android:id="@+id/night"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableEnd="@drawable/user_option_selector"
+        android:drawablePadding="@dimen/common_menu_button_padding"
+        android:drawableStart="@drawable/night"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/common_menu_button_padding"
+        android:text="@string/common_night_mode"
+        android:textColor="@color/common_baseTextColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/head" />
+
+    <Button
+        android:id="@+id/feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableEnd="@drawable/more"
+        android:drawablePadding="@dimen/common_menu_button_padding"
+        android:drawableStart="@drawable/feedback"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/common_menu_button_padding"
+        android:text="@string/common_feedback"
+        android:textColor="@color/common_baseTextColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/night" />
+
+</android.support.constraint.ConstraintLayout>

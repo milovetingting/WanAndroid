@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_head_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_menu_button_padding"
+        android:src="@drawable/user_back_selector"
+        app:layout_constraintBottom_toBottomOf="@id/head"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/head" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/common_collect_list"
+        android:textColor="@color/common_baseTextColor"
+        app:layout_constraintBottom_toBottomOf="@id/head"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/head" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/activity_collect_article_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/common_head_height"
+        android:background="@color/common_baseBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srlAccentColor="@android:color/transparent">
+
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/activity_collect_article_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <me.itangqi.waveloadingview.WaveLoadingView
+        android:id="@+id/loading"
+        android:layout_width="@dimen/common_loading_size"
+        android:layout_height="@dimen/common_loading_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:wlv_borderColor="@color/common_loading_wave"
+        app:wlv_borderWidth="@dimen/common_loading_border"
+        app:wlv_shapeType="circle"
+        app:wlv_titleCenter="@string/common_loading"
+        app:wlv_titleCenterColor="@color/common_baseTextColor"
+        app:wlv_titleCenterSize="@dimen/common_loading_textSize"
+        app:wlv_triangle_direction="north"
+        app:wlv_waveColor="@color/common_loading_wave" />
+
+</android.support.constraint.ConstraintLayout>
+
+

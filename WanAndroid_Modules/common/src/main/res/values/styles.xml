@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="common_AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/common_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/common_colorPrimaryDark</item>
+        <item name="colorAccent">@color/common_colorAccent</item>
+        <item name="android:textColor">@color/common_baseTextColor</item>
+    </style>
+
+    <style name="common_AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
+</resources>

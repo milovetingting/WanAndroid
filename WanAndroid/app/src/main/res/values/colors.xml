@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#06B3ED</color>
+
+    <color name="baseTextColor">#757575</color>
+    <color name="baseBackground">#FFFFFF</color>
+
+    <color name="tag_bg">#06B3ED</color>
+
+    <color name="loading_wave">#06B3ED</color>
+
+    <color name="navigation_checked">#51A9EC</color>
+    <color name="navigation_unchecked">#D1CFCF</color>
+
+    <color name="indicator_color">#0095ff</color>
+    <color name="tab_selected_text_color">#051f31</color>
+    <color name="tab_text_color">#55000000</color>
+
+    <color name="menu_head">#FAFAFA</color>
+
+    <color name="card_bg">#FFFFFF</color>
+    <color name="card_night_bg">#4D4D4D</color>
+
+    <color name="button_bg">#06B3ED</color>
+    <color name="button_border">#06B3ED</color>
+</resources>

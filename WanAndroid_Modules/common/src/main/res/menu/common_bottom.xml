@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_bottom_home"
+        android:icon="@drawable/common_home_selector"
+        android:title="@string/common_home"></item>
+
+    <item
+        android:id="@+id/menu_bottom_system"
+        android:icon="@drawable/common_system_selector"
+        android:title="@string/common_system"></item>
+
+    <item
+        android:id="@+id/menu_bottom_project"
+        android:icon="@drawable/common_project_selector"
+        android:title="@string/common_project"></item>
+
+    <item
+        android:id="@+id/menu_bottom_wx"
+        android:icon="@drawable/common_wx_selector"
+        android:title="@string/common_wx"></item>
+
+</menu>

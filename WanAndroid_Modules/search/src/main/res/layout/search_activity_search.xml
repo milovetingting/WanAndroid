@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_head_height"
+        android:background="@color/common_baseBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_menu_button_padding"
+        android:src="@drawable/common_back_selector"
+        app:layout_constraintBottom_toBottomOf="@id/head"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/head" />
+
+    <EditText
+        android:id="@+id/key_word"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/common_input_key"
+        android:textSize="@dimen/search_et_textSize"
+        app:layout_constraintBottom_toBottomOf="@id/head"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/head" />
+
+    <ImageView
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_menu_button_padding"
+        android:src="@drawable/search"
+        app:layout_constraintBottom_toBottomOf="@id/head"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/head" />
+
+    <TextView
+        android:id="@+id/hot_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/search_marginStart"
+        android:text="@string/common_hot_key"
+        android:textColor="@color/common_baseTextColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/head" />
+
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:id="@+id/tag_hot_key"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/hot_key" />
+
+    <me.itangqi.waveloadingview.WaveLoadingView
+        android:id="@+id/loading"
+        android:layout_width="@dimen/common_loading_size"
+        android:layout_height="@dimen/common_loading_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:wlv_borderColor="@color/common_loading_wave"
+        app:wlv_borderWidth="@dimen/common_loading_border"
+        app:wlv_shapeType="circle"
+        app:wlv_titleCenter="@string/common_loading"
+        app:wlv_titleCenterColor="@color/common_baseTextColor"
+        app:wlv_titleCenterSize="@dimen/common_loading_textSize"
+        app:wlv_triangle_direction="north"
+        app:wlv_waveColor="@color/common_loading_wave" />
+
+</android.support.constraint.ConstraintLayout>

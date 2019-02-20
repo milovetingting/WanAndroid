@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wangyz.wanandroid">
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icon"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".view.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.ArticleActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".view.RegisterActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".view.LoginActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".view.CollectActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".view.SearchActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".view.SearchResultActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".view.SettingActivity"
+            android:launchMode="singleTop" />
+    </application>
+
+</manifest>

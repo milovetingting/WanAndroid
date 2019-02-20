@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.wangyz.user">
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/user_ic_launcher"
+        android:label="@string/common_app_name"
+        android:roundIcon="@mipmap/user_ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/common_AppTheme"
+        tools:replace="android:icon,android:label,android:name,android:roundIcon,android:theme">
+        <activity
+            android:name=".view.MainActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.CollectActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".view.LoginActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".view.RegisterActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".view.SettingActivity"
+            android:launchMode="singleTop" />
+    </application>
+
+</manifest>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<litepal>
+    <dbname value="android"></dbname>
+    <version value="1"></version>
+    <storage value="external"></storage>
+    <list>
+        <mapping class="com.wangyz.wanandroid.bean.db.Banner"></mapping>
+        <mapping class="com.wangyz.wanandroid.bean.db.Article"></mapping>
+        <mapping class="com.wangyz.wanandroid.bean.db.Author"></mapping>
+        <mapping class="com.wangyz.wanandroid.bean.db.ProjectCategory"></mapping>
+        <mapping class="com.wangyz.wanandroid.bean.db.Tree"></mapping>
+        <mapping class="com.wangyz.wanandroid.bean.db.Collect"></mapping>
+    </list>
+</litepal>

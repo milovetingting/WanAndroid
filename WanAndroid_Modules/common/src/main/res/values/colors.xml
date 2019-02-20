@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="common_colorPrimary">#3F51B5</color>
+    <color name="common_colorPrimaryDark">#303F9F</color>
+    <color name="common_colorAccent">#06B3ED</color>
+
+    <color name="common_baseTextColor">#757575</color>
+    <color name="common_baseBackground">#FFFFFF</color>
+
+    <color name="common_tag_bg">#06B3ED</color>
+
+    <color name="common_loading_wave">#06B3ED</color>
+
+    <color name="common_navigation_checked">#51A9EC</color>
+    <color name="common_navigation_unchecked">#D1CFCF</color>
+
+    <color name="common_indicator_color">#0095ff</color>
+    <color name="common_tab_selected_text_color">#051f31</color>
+    <color name="common_tab_text_color">#55000000</color>
+
+    <color name="common_menu_head">#FAFAFA</color>
+
+    <color name="common_card_bg">#FFFFFF</color>
+    <color name="common_card_night_bg">#4D4D4D</color>
+
+    <color name="common_button_bg">#06B3ED</color>
+    <color name="common_button_border">#06B3ED</color>
+</resources>

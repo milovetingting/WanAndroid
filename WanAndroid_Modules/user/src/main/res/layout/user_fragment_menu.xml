@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_baseBackground"
+    android:clickable="true">
+
+    <View
+        android:id="@+id/menu_user"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_menu_title_height"
+        android:background="@color/common_menu_head" />
+
+    <ImageView
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_menu_marginStart"
+        android:layout_marginTop="@dimen/common_menu_title_marginTop"
+        android:src="@drawable/user"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_menu_marginStart"
+        android:layout_marginTop="@dimen/common_menu_title_marginTop"
+        android:gravity="center"
+        android:textColor="@color/common_baseTextColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:gravity="left|center_vertical"
+        android:paddingStart="@dimen/common_menu_button_padding"
+        android:text="@string/common_login"
+        android:textColor="@color/common_baseTextColor"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:gravity="left|center_vertical"
+        android:paddingStart="@dimen/common_menu_button_padding"
+        android:text="@string/common_logout"
+        android:textColor="@color/common_baseTextColor"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username" />
+
+    <Button
+        android:id="@+id/collect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableEnd="@drawable/more"
+        android:drawableStart="@drawable/favorite"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/common_menu_button_padding"
+        android:text="@string/common_collect_list"
+        android:textColor="@color/common_baseTextColor"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/menu_user" />
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableEnd="@drawable/more"
+        android:drawableStart="@drawable/settings"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/common_menu_button_padding"
+        android:text="@string/common_settings"
+        android:textColor="@color/common_baseTextColor"
+        app:layout_constraintTop_toBottomOf="@id/collect" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#868686</color>
+    <color name="colorPrimaryDark">#D2D2D2</color>
+    <color name="colorAccent">#C0C0C0</color>
+
+    <color name="baseTextColor">#C0C0C0</color>
+    <color name="baseBackground">#303030</color>
+
+    <color name="tag_bg">#C0C0C0</color>
+
+    <color name="loading_wave">#4D4D4D</color>
+
+    <color name="navigation_checked">#51A9EC</color>
+    <color name="navigation_unchecked">#D1CFCF</color>
+
+    <color name="indicator_color">#0095ff</color>
+    <color name="tab_selected_text_color">#051f31</color>
+    <color name="tab_text_color">#55000000</color>
+
+    <color name="menu_head">#FAFAFA</color>
+
+    <color name="button_bg">#4D4D4D</color>
+    <color name="button_border">#303030</color>
+</resources>

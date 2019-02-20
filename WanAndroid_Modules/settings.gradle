@@ -1,0 +1,1 @@
+include ':app', ':common', ':home', ':knowledge', ':project', ':wx', ':user', ':article', ':search'
