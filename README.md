@@ -129,5 +129,11 @@
 
 ![search_night.png](https://upload-images.jianshu.io/upload_images/3381990-14a8b502fb2c8510.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+APK下载
+
+![APK.png](https://upload-images.jianshu.io/upload_images/3381990-c447044cc042061a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 > 项目地址:[https://github.com/milovetingting/WanAndroid/tree/master/WanAndroid](https://github.com/milovetingting/WanAndroid/tree/master/WanAndroid)
+
+> [WanAndroid](https://github.com/milovetingting/WanAndroid/tree/master/WanAndroid "WanAndroid")为非组件化应用。[WanAndroid_Modules](https://github.com/milovetingting/WanAndroid/tree/master/WanAndroid_Modules "WanAndroid_Modules")为组件化应用。
