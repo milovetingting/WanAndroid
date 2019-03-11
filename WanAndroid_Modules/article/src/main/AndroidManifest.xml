@@ -19,7 +19,9 @@
         tools:replace="android:label,android:name,android:theme">
         <activity
             android:name=".view.ArticleActivity"
-            android:launchMode="singleTop" />
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

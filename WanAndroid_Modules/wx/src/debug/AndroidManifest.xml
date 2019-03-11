@@ -17,7 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/common_AppTheme"
         tools:replace="android:icon,android:label,android:name,android:roundIcon,android:theme">
-        <activity android:name=".view.MainActivity">
+        <activity
+            android:name=".view.MainActivity"
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

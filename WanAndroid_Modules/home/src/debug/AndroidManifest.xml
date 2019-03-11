@@ -19,7 +19,9 @@
         tools:replace="android:icon,android:label,android:name,android:roundIcon,android:theme">
         <activity
             android:name=".view.MainActivity"
-            android:launchMode="singleTop">
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -15,7 +15,11 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity">
+        <activity
+            android:name=".view.MainActivity"
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,25 +28,39 @@
         </activity>
         <activity
             android:name=".view.ArticleActivity"
-            android:launchMode="singleTop" />
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.RegisterActivity"
-            android:launchMode="singleTop" />
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.LoginActivity"
-            android:launchMode="singleTop" />
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.CollectActivity"
-            android:launchMode="singleTop" />
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.SearchActivity"
-            android:launchMode="singleTop" />
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.SearchResultActivity"
-            android:launchMode="singleTop" />
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.SettingActivity"
-            android:launchMode="singleTop" />
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
