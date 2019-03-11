@@ -19,10 +19,14 @@
         tools:replace="android:icon,android:label,android:name,android:roundIcon,android:theme">
         <activity
             android:name=".view.SearchActivity"
-            android:launchMode="singleTop"></activity>
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".view.SearchResultActivity"
-            android:launchMode="singleTop" />
+            android:configChanges="orientation|screenSize|locale"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -90,6 +90,8 @@ public class ArticleActivity extends BaseActivity<Contract.ArticleActivityView, 
         }
 
         mAgentWeb = AgentWeb.with(this).setAgentWebParent(mLinearLayout, new LinearLayout.LayoutParams(-1, -1)).useDefaultIndicator().createAgentWeb().ready().go(mLink);
+        mAgentWeb.getAgentWebSettings().getWebSettings().setUseWideViewPort(true);
+        mAgentWeb.getAgentWebSettings().getWebSettings().setLoadWithOverviewMode(true);
     }
 
     @Override
