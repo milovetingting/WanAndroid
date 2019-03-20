@@ -10,7 +10,7 @@ public class ConstantValue {
     /**
      * 域名
      */
-    public static final String URL_BASE = "http://www.wanandroid.com";
+    public static final String URL_BASE = "https://www.wanandroid.com";
 
     /**
      * banner的url
