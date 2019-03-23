@@ -6,10 +6,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -28,6 +26,8 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.wangyz.wanandroid.ConstantValue;
 import com.wangyz.wanandroid.R;
 import com.wangyz.wanandroid.base.BaseActivity;
@@ -354,11 +354,50 @@ public class MainActivity extends BaseActivity<Contract.MainActivityView, MainAc
                 if (TextUtils.equals(info.getMD5(), md5)) {
                     AppUtils.installApp(new File(mContext.getExternalFilesDir(null), ConstantValue.UPDATE_NAME));
                 } else {
-                    mPresenter.download();
+                    download();
                 }
+            } else {
+                download();
+            }
+        });
+    }
+
+    private void showNetworkDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
+
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        window.getDecorView().setPadding(20, 0, 20, 20);
+        window.setAttributes(layoutParams);
+
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_network, null, false);
+        window.setContentView(view);
+
+        Button cancel = view.findViewById(R.id.dialog_network_cancel_btn);
+        Button ok = view.findViewById(R.id.dialog_network_ok_btn);
+        cancel.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+        ok.setOnClickListener(v -> {
+            dialog.dismiss();
+            mPresenter.download();
+        });
+    }
+
+    private void download() {
+        if (NetworkUtils.isConnected()) {
+            if (NetworkUtils.isMobileData()) {
+                showNetworkDialog();
             } else {
                 mPresenter.download();
             }
-        });
+        } else {
+            ToastUtils.showShort(getString(R.string.network_not_connect));
+        }
     }
 }

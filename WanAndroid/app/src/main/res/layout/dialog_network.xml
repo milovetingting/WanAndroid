@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@drawable/dialog_bg"
+    android:padding="@dimen/dialog_update_padding">
+
+    <TextView
+        android:id="@+id/dialog_network_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_update_title"
+        android:gravity="center"
+        android:text="@string/download"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/dialog_network_divider_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_update_divider"
+        android:layout_marginTop="@dimen/dialog_update_content_marginTop"
+        android:background="@color/dialog_update_divider"
+        app:layout_constraintTop_toBottomOf="@id/dialog_network_title_tv" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_vertical"
+        android:text="@string/tip"
+        app:layout_constraintBottom_toTopOf="@id/dialog_network_cancel_btn"
+        app:layout_constraintTop_toBottomOf="@id/dialog_network_divider_view" />
+
+    <Button
+        android:id="@+id/dialog_network_cancel_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dialog_update_btn_margin"
+        android:layout_marginBottom="@dimen/dialog_update_btn_margin"
+        android:background="@drawable/later_button_bg"
+        android:text="@string/cancel"
+        android:textColor="@color/dialog_update_later_textColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/dialog_network_ok_btn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/dialog_network_ok_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dialog_update_btn_margin"
+        android:layout_marginBottom="@dimen/dialog_update_btn_margin"
+        android:background="@drawable/update_button_bg"
+        android:text="@string/ok"
+        android:textColor="@color/dialog_update_now_textColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dialog_network_cancel_btn" />
+
+</android.support.constraint.ConstraintLayout>

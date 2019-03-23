@@ -41,4 +41,8 @@
     <string name="empty">没有数据</string>
     <string name="download">下载更新</string>
     <string name="downloading">下载中</string>
+    <string name="tip">当前为移动网络环境，使用移动流量下载?</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="network_not_connect">网络未连接</string>
 </resources>
