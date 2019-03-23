@@ -71,8 +71,8 @@ public class ProjectArticleAdapter extends RecyclerView.Adapter<ProjectArticleAd
         RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.loading).error(R.drawable.load_failed);
         Glide.with(mContext).load(model.pic).apply(requestOptions).into(viewHolder.pic);
         viewHolder.title.setText(StringEscapeUtils.unescapeHtml4(model.title));
-        viewHolder.des.setText(model.des);
-        viewHolder.author.setText(model.author);
+        viewHolder.des.setText(StringEscapeUtils.unescapeHtml4(model.des));
+        viewHolder.author.setText(StringEscapeUtils.unescapeHtml4(model.author));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(model.time);
         viewHolder.time.setText(sdf.format(date));

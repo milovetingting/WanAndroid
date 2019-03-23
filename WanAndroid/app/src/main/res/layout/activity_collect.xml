@@ -55,6 +55,14 @@
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/empty"
+        android:visibility="gone" />
+
     <me.itangqi.waveloadingview.WaveLoadingView
         android:id="@+id/loading"
         android:layout_width="@dimen/loading_size"

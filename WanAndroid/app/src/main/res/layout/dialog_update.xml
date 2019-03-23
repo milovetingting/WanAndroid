@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:padding="@dimen/dialog_update_padding">
+
+    <TextView
+        android:id="@+id/dialog_update_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_update_title"
+        android:gravity="center"
+        android:text="@string/new_version"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/dialog_update_divider_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_update_divider"
+        android:layout_marginTop="@dimen/dialog_update_content_marginTop"
+        android:background="@color/dialog_update_divider"
+        app:layout_constraintTop_toBottomOf="@id/dialog_update_title_tv" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_update_content_height"
+        android:layout_marginTop="@dimen/dialog_update_content_marginTop"
+        app:layout_constraintTop_toBottomOf="@id/dialog_update_divider_view">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dialog_update_versionName_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dialog_update_content_marginTop"
+                android:text="@string/version" />
+
+            <TextView
+                android:id="@+id/dialog_update_size_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dialog_update_content_marginTop"
+                android:text="@string/size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dialog_update_content_marginTop"
+                android:text="@string/detail" />
+
+            <TextView
+                android:id="@+id/dialog_update_detail_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dialog_update_content_marginTop" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/dialog_update_later_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dialog_update_btn_margin"
+        android:layout_marginEnd="@dimen/dialog_update_btn_margin"
+        android:background="@drawable/later_button_bg"
+        android:text="@string/later"
+        android:textColor="@color/dialog_update_later_textColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/dialog_update_update_btn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/dialog_update_update_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dialog_update_btn_margin"
+        android:layout_marginStart="@dimen/dialog_update_btn_margin"
+        android:background="@drawable/update_button_bg"
+        android:text="@string/update_now"
+        android:textColor="@color/dialog_update_now_textColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dialog_update_later_btn" />
+
+</android.support.constraint.ConstraintLayout>

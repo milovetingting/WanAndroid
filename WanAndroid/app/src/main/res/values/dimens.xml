@@ -35,4 +35,11 @@
 
     <dimen name="search_marginStart">10dp</dimen>
     <dimen name="search_et_textSize">16sp</dimen>
+
+    <dimen name="dialog_update_padding">10dp</dimen>
+    <dimen name="dialog_update_title">30dp</dimen>
+    <dimen name="dialog_update_divider">1dp</dimen>
+    <dimen name="dialog_update_content_height">200dp</dimen>
+    <dimen name="dialog_update_content_marginTop">5dp</dimen>
+    <dimen name="dialog_update_btn_margin">5dp</dimen>
 </resources>

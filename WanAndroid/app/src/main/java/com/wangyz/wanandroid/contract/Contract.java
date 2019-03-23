@@ -11,10 +11,12 @@ import com.wangyz.wanandroid.bean.model.Logout;
 import com.wangyz.wanandroid.bean.model.Register;
 import com.wangyz.wanandroid.bean.model.SearchResult;
 import com.wangyz.wanandroid.bean.model.TreeInfo;
+import com.wangyz.wanandroid.bean.model.Update;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 
 /**
  * @author wangyz
@@ -50,6 +52,20 @@ public class Contract {
      */
     public interface MainActivityModel {
 
+        /**
+         * 检查更新
+         *
+         * @return
+         */
+        Observable<Update> checkUpdate();
+
+        /**
+         * 下载文件
+         *
+         * @return
+         */
+        Observable<ResponseBody> download();
+
     }
 
     /**
@@ -57,12 +73,34 @@ public class Contract {
      */
     public interface MainActivityView extends BaseView {
 
+        /**
+         * 检查更新
+         *
+         * @param update
+         */
+        void onCheckUpdate(Update update);
+
+        /**
+         * 下载文件
+         */
+        void onDownload();
+
     }
 
     /**
      * MainActivityPresenter
      */
     public interface MainActivityPresenter {
+
+        /**
+         * 检查更新
+         */
+        void checkUpdate();
+
+        /**
+         * 下载文件
+         */
+        void download();
 
     }
 

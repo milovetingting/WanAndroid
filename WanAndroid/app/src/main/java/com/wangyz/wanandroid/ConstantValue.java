@@ -13,6 +13,26 @@ public class ConstantValue {
     public static final String TAG = "WanAndroid";
 
     /**
+     * github
+     */
+    public static final String URL_BASE_GITHUB = "https://raw.githubusercontent.com";
+
+    /**
+     * 检查更新的url
+     */
+    public static final String URL_UPDATE = "/milovetingting/WanAndroid/master/WanAndroid/update.json";
+
+    /**
+     * 版本更新的APK地址
+     */
+    public static final String URL_UPDATE_APK = "/milovetingting/WanAndroid/master/WanAndroid/app/release/app-release.apk";
+
+    /**
+     * 保存的更新APK名称
+     */
+    public static final String UPDATE_NAME = "update.apk";
+
+    /**
      * 域名
      */
     public static final String URL_BASE = "https://www.wanandroid.com";
@@ -146,5 +166,10 @@ public class ConstantValue {
      * 搜索结果正则表达式
      */
     public static final String REGEX = "<em class='highlight'>(.+)</em>";
+
+    /**
+     * 超时时间
+     */
+    public static final int DEFAULT_TIMEOUT = 15;
 
 }

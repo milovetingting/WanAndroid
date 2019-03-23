@@ -20,6 +20,7 @@
             android:id="@+id/item_main_list_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,9 +52,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/collect_selector"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/item_main_list_time"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/item_main_list_title" />
 
     </android.support.constraint.ConstraintLayout>
 

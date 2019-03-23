@@ -9,6 +9,7 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -53,6 +54,9 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
     @BindView(R.id.loading)
     WaveLoadingView mWaveLoadingView;
 
+    @BindView(R.id.tv_empty)
+    TextView mEmpty;
+
     private Context mContext;
 
     private CollectArticleAdapter mAdapter;
@@ -89,6 +93,7 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
 
         mSmartRefreshLayout.setOnRefreshListener(refreshLayout -> {
             mPresenter.refresh(0);
+            mEmpty.setVisibility(View.GONE);
         });
 
         mSmartRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
@@ -128,7 +133,8 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
         if (mWaveLoadingView.getVisibility() == View.VISIBLE) {
             mWaveLoadingView.setVisibility(View.GONE);
         }
-        if (list != null) {
+        if (list != null && list.size() > 0) {
+            mEmpty.setVisibility(View.GONE);
             List<Collect> tempList = new ArrayList<>();
             list.stream().forEach(m -> {
                 long count = mList.stream().filter(n -> n.articleId == m.articleId).count();
@@ -138,13 +144,16 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
             });
             mList.addAll(tempList);
             mAdapter.setList(mList);
+        } else {
+            mEmpty.setVisibility(View.VISIBLE);
         }
     }
 
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public void onRefresh(List<Collect> list) {
-        if (list != null) {
+        if (list != null && list.size() > 0) {
+            mEmpty.setVisibility(View.GONE);
             List<Collect> tempList = new ArrayList<>();
             list.stream().forEach(m -> {
                 long count = mList.stream().filter(n -> n.articleId == m.articleId).count();
@@ -154,6 +163,8 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
             });
             mList.addAll(0, tempList);
             mAdapter.setList(mList);
+        } else {
+            mEmpty.setVisibility(View.VISIBLE);
         }
     }
 
@@ -166,6 +177,11 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
                 mList.clear();
                 mList.addAll(tempList);
                 mAdapter.setList(mList);
+                if (tempList != null && tempList.size() > 0) {
+                    mEmpty.setVisibility(View.GONE);
+                } else {
+                    mEmpty.setVisibility(View.VISIBLE);
+                }
             } else {
                 ToastUtils.showShort(mContext.getString(R.string.uncollect_failed));
             }

@@ -19,6 +19,7 @@ import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class TreeAdapter extends RecyclerView.Adapter<TreeAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         TreeInfo model = mList.get(i);
-        viewHolder.title.setText(model.name);
+        viewHolder.title.setText(StringEscapeUtils.unescapeHtml4(model.name));
         viewHolder.tags.setAdapter(new TagAdapter<Tree>(model.child) {
             @Override
             public View getView(FlowLayout flowLayout, int i, Tree tree) {

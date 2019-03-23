@@ -2,31 +2,48 @@ package com.wangyz.wanandroid.view;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.wangyz.wanandroid.ConstantValue;
 import com.wangyz.wanandroid.R;
 import com.wangyz.wanandroid.base.BaseActivity;
 import com.wangyz.wanandroid.bean.event.Event;
+import com.wangyz.wanandroid.bean.model.Update;
 import com.wangyz.wanandroid.contract.Contract;
 import com.wangyz.wanandroid.custom.BottomNavigationViewHelper;
 import com.wangyz.wanandroid.presenter.MainActivityPresenter;
+import com.wangyz.wanandroid.util.MD5Utils;
+import com.wangyz.wanandroid.util.NotificationUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -167,6 +184,8 @@ public class MainActivity extends BaseActivity<Contract.MainActivityView, MainAc
 
         mTransaction.commit();
 
+        mPresenter.checkUpdate();
+
     }
 
     @Override
@@ -279,5 +298,67 @@ public class MainActivity extends BaseActivity<Contract.MainActivityView, MainAc
             }
         }
         return super.onKeyDown(i, keyevent);
+    }
+
+    @Override
+    public void onCheckUpdate(Update update) {
+        if (update != null) {
+            if (AppUtils.getAppVersionCode() < update.getVersionCode()) {
+                //提示更新
+                LogUtils.i("alert to update");
+                showUpdate(update);
+            }
+        }
+    }
+
+    @Override
+    public void onDownload() {
+        LogUtils.i("finish download");
+        NotificationUtils.cancleNotification(1);
+        AppUtils.installApp(new File(mContext.getExternalFilesDir(null), ConstantValue.UPDATE_NAME));
+    }
+
+    private void showUpdate(Update info) {
+
+        Dialog dialog = new Dialog(this);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
+
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        window.getDecorView().setPadding(20, 0, 20, 20);
+        window.setAttributes(layoutParams);
+
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_update, null, false);
+        window.setContentView(view);
+
+        TextView versionName = view.findViewById(R.id.dialog_update_versionName_tv);
+        TextView size = view.findViewById(R.id.dialog_update_size_tv);
+        TextView detail = view.findViewById(R.id.dialog_update_detail_tv);
+        versionName.setText(getString(R.string.version) + " " + info.getVersionName());
+        size.setText(getString(R.string.size) + " " + info.getSize());
+        detail.setText(info.getDetail());
+        Button later = view.findViewById(R.id.dialog_update_later_btn);
+        Button update = view.findViewById(R.id.dialog_update_update_btn);
+        later.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+        update.setOnClickListener(v -> {
+            dialog.dismiss();
+            File file = new File(mContext.getExternalFilesDir(null), ConstantValue.UPDATE_NAME);
+            if (file.exists()) {
+                String md5 = MD5Utils.getFileMD5(file.getAbsolutePath());
+                if (TextUtils.equals(info.getMD5(), md5)) {
+                    AppUtils.installApp(new File(mContext.getExternalFilesDir(null), ConstantValue.UPDATE_NAME));
+                } else {
+                    mPresenter.download();
+                }
+            } else {
+                mPresenter.download();
+            }
+        });
     }
 }

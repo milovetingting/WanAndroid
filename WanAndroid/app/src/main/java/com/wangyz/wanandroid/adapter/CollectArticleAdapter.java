@@ -67,8 +67,8 @@ public class CollectArticleAdapter extends RecyclerView.Adapter<CollectArticleAd
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Collect model = mList.get(i);
         viewHolder.title.setText(StringEscapeUtils.unescapeHtml4(model.title));
-        viewHolder.author.setText(mContext.getResources().getString(R.string.author) + model.author);
-        viewHolder.category.setText(mContext.getResources().getString(R.string.category) + model.category);
+        viewHolder.author.setText(mContext.getResources().getString(R.string.author) + StringEscapeUtils.unescapeHtml4(model.author));
+        viewHolder.category.setText(mContext.getResources().getString(R.string.category) + StringEscapeUtils.unescapeHtml4(model.category));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(model.time);
         viewHolder.time.setText(sdf.format(date));

@@ -67,8 +67,8 @@ public class TreeArticleAdapter extends RecyclerView.Adapter<TreeArticleAdapter.
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Article model = mList.get(i);
         viewHolder.title.setText(StringEscapeUtils.unescapeHtml4(model.title));
-        viewHolder.author.setText(model.author);
-        viewHolder.category.setText(model.category);
+        viewHolder.author.setText(StringEscapeUtils.unescapeHtml4(model.author));
+        viewHolder.category.setText(StringEscapeUtils.unescapeHtml4(model.category));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(model.time);
         viewHolder.time.setText(sdf.format(date));

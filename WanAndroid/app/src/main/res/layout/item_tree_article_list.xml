@@ -17,6 +17,7 @@
         android:padding="@dimen/main_list_item_padding">
 
         <TextView
+            android:maxLines="2"
             android:id="@+id/item_main_list_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

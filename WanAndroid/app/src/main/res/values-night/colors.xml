@@ -22,4 +22,10 @@
 
     <color name="button_bg">#4D4D4D</color>
     <color name="button_border">#303030</color>
+
+    <color name="dialog_update_divider">#EAEAEA</color>
+    <color name="dialog_update_later">#F8F8F8</color>
+    <color name="dialog_update_now">#037DFF</color>
+    <color name="dialog_update_later_textColor">#FFFFFF</color>
+    <color name="dialog_update_now_textColor">#FFFFFF</color>
 </resources>
