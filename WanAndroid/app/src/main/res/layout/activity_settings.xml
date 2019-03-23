@@ -41,9 +41,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:drawableStart="@drawable/night"
         android:drawableEnd="@drawable/option_selector"
         android:drawablePadding="@dimen/menu_button_padding"
-        android:drawableStart="@drawable/night"
         android:gravity="left|center_vertical"
         android:padding="@dimen/menu_button_padding"
         android:text="@string/night_mode"
@@ -56,14 +56,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:drawableStart="@drawable/feedback"
         android:drawableEnd="@drawable/more"
         android:drawablePadding="@dimen/menu_button_padding"
-        android:drawableStart="@drawable/feedback"
         android:gravity="left|center_vertical"
         android:padding="@dimen/menu_button_padding"
         android:text="@string/feedback"
         android:textColor="@color/baseTextColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/night" />
+
+    <Button
+        android:id="@+id/about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableStart="@drawable/about"
+        android:drawableEnd="@drawable/more"
+        android:drawablePadding="@dimen/menu_button_padding"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/menu_button_padding"
+        android:text="@string/about"
+        android:textColor="@color/baseTextColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feedback" />
 
 </android.support.constraint.ConstraintLayout>

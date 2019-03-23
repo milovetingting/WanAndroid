@@ -1,12 +1,21 @@
 package com.wangyz.wanandroid.view;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.wangyz.wanandroid.ConstantValue;
 import com.wangyz.wanandroid.R;
@@ -32,6 +41,9 @@ public class SettingActivity extends BaseActivity<Contract.SettingActivityView, 
 
     @BindView(R.id.feedback)
     Button mFeedBack;
+
+    @BindView(R.id.about)
+    Button mAbout;
 
     private Context mContext;
 
@@ -85,6 +97,29 @@ public class SettingActivity extends BaseActivity<Contract.SettingActivityView, 
         intent.putExtra(ConstantValue.KEY_LINK, ConstantValue.URL_FEEDBACK);
         intent.putExtra(ConstantValue.KEY_TITLE, mContext.getString(R.string.feedback));
         mContext.startActivity(intent);
+    }
+
+    @OnClick(R.id.about)
+    public void about() {
+        Dialog dialog = new Dialog(this);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
+
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        window.getDecorView().setPadding(20, 0, 20, 20);
+        window.setAttributes(layoutParams);
+
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_about, null, false);
+        window.setContentView(view);
+
+        TextView versionName = view.findViewById(R.id.dialog_versionName_tv);
+        TextView detail = view.findViewById(R.id.dialog_detail_tv);
+        versionName.setText(AppUtils.getAppVersionName());
+        detail.setText(getString(R.string.function_detail));
     }
 
     public void changeMode() {

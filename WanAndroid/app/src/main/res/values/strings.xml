@@ -31,6 +31,7 @@
     <string name="settings">设置</string>
     <string name="night_mode">夜间模式</string>
     <string name="feedback">反馈</string>
+    <string name="about">关于</string>
 
     <string name="new_version">发现新版本</string>
     <string name="version">版本</string>
@@ -45,4 +46,7 @@
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
     <string name="network_not_connect">网络未连接</string>
+    <string name="function">功能介绍</string>
+    <string name="function_detail">基于WanAndroid开放API开发的技术文章阅读App。主要功能包括：首页、体系、项目、公众号、搜索、登录、收藏、夜间模式等。</string>
+
 </resources>
