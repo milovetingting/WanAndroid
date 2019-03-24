@@ -18,24 +18,28 @@
             android:orientation="vertical">
 
             <TextView
+                android:textColor="@color/baseTextColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dialog_update_content_marginTop"
                 android:text="@string/version" />
 
             <TextView
+                android:textColor="@color/baseTextColor"
                 android:id="@+id/dialog_versionName_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dialog_update_content_marginTop" />
 
             <TextView
+                android:textColor="@color/baseTextColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dialog_update_content_marginTop"
                 android:text="@string/function" />
 
             <TextView
+                android:textColor="@color/baseTextColor"
                 android:id="@+id/dialog_detail_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
