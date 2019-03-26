@@ -8,6 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,6 +59,9 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
 
     @BindView(R.id.tv_empty)
     TextView mEmpty;
+
+    @BindView(R.id.load)
+    ImageView mLoading;
 
     private Context mContext;
 
@@ -123,6 +129,7 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
     public void onLoadFailed() {
         LogUtils.e();
         ToastUtils.showShort(mContext.getString(R.string.load_failed));
+        stopAnim();
         mSmartRefreshLayout.finishRefresh();
         mSmartRefreshLayout.finishLoadMore();
     }
@@ -171,6 +178,7 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public void onUnCollect(com.wangyz.wanandroid.bean.model.Collect result, int articleId) {
+        stopAnim();
         if (result != null) {
             if (result.getErrorCode() == 0) {
                 List<Collect> tempList = mList.stream().filter(a -> a.articleId != articleId).collect(Collectors.toList());
@@ -194,6 +202,7 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
             if (event.type == Event.TYPE_UNCOLLECT) {
                 int articleId = Integer.valueOf(event.data);
                 mPresenter.unCollect(articleId);
+                startAnim();
             }
         }
     }
@@ -201,5 +210,18 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
     @OnClick(R.id.back)
     public void back() {
         finish();
+    }
+
+    private void startAnim() {
+        mLoading.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.loading);
+        LinearInterpolator li = new LinearInterpolator();
+        animation.setInterpolator(li);
+        mLoading.startAnimation(animation);
+    }
+
+    private void stopAnim() {
+        mLoading.setVisibility(View.GONE);
+        mLoading.clearAnimation();
     }
 }

@@ -132,6 +132,10 @@ public class ProjectArticleFragment extends BaseFragment<Contract.ProjectArticle
     public void onLoadFailed() {
         LogUtils.e();
         ToastUtils.showShort(mContext.getString(R.string.load_failed));
+        Event e = new Event();
+        e.target = Event.TARGET_MAIN;
+        e.type = Event.TYPE_STOP_ANIMATION;
+        EventBus.getDefault().post(e);
         mSmartRefreshLayout.finishRefresh();
         mSmartRefreshLayout.finishLoadMore();
     }
@@ -198,6 +202,10 @@ public class ProjectArticleFragment extends BaseFragment<Contract.ProjectArticle
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public void onCollect(Collect result, int articleId) {
+        Event e = new Event();
+        e.target = Event.TARGET_MAIN;
+        e.type = Event.TYPE_STOP_ANIMATION;
+        EventBus.getDefault().post(e);
         if (result != null) {
             if (result.getErrorCode() == 0) {
                 mList.stream().filter(a -> a.articleId == articleId).findFirst().get().collect = true;
@@ -211,6 +219,10 @@ public class ProjectArticleFragment extends BaseFragment<Contract.ProjectArticle
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public void onUnCollect(Collect result, int articleId) {
+        Event e = new Event();
+        e.target = Event.TARGET_MAIN;
+        e.type = Event.TYPE_STOP_ANIMATION;
+        EventBus.getDefault().post(e);
         if (result != null) {
             if (result.getErrorCode() == 0) {
                 mList.stream().filter(a -> a.articleId == articleId).findFirst().get().collect = false;
@@ -229,12 +241,20 @@ public class ProjectArticleFragment extends BaseFragment<Contract.ProjectArticle
                 if (data.length > 1 && mCategoryId == Integer.valueOf(data[1])) {
                     int articleId = Integer.valueOf(data[0]);
                     mPresenter.collect(articleId);
+                    Event e = new Event();
+                    e.target = Event.TARGET_MAIN;
+                    e.type = Event.TYPE_START_ANIMATION;
+                    EventBus.getDefault().post(e);
                 }
             } else if (event.type == Event.TYPE_UNCOLLECT) {
                 String[] data = event.data.split(";");
                 if (data.length > 1 && mCategoryId == Integer.valueOf(data[1])) {
                     int articleId = Integer.valueOf(data[0]);
                     mPresenter.unCollect(articleId);
+                    Event e = new Event();
+                    e.target = Event.TARGET_MAIN;
+                    e.type = Event.TYPE_START_ANIMATION;
+                    EventBus.getDefault().post(e);
                 }
             } else if (event.type == Event.TYPE_LOGIN) {
                 mList.clear();

@@ -134,6 +134,10 @@ public class TreeArticleFragment extends BaseFragment<Contract.TreeArticleFragme
     public void onLoadFailed() {
         LogUtils.e();
         ToastUtils.showShort(mContext.getString(R.string.load_failed));
+        Event e = new Event();
+        e.target = Event.TARGET_MAIN;
+        e.type = Event.TYPE_STOP_ANIMATION;
+        EventBus.getDefault().post(e);
         mSmartRefreshLayout.finishRefresh();
         mSmartRefreshLayout.finishLoadMore();
     }
@@ -203,9 +207,17 @@ public class TreeArticleFragment extends BaseFragment<Contract.TreeArticleFragme
             if (event.type == Event.TYPE_COLLECT) {
                 int articleId = Integer.valueOf(event.data);
                 mPresenter.collect(articleId);
+                Event e = new Event();
+                e.target = Event.TARGET_MAIN;
+                e.type = Event.TYPE_START_ANIMATION;
+                EventBus.getDefault().post(e);
             } else if (event.type == Event.TYPE_UNCOLLECT) {
                 int articleId = Integer.valueOf(event.data);
                 mPresenter.unCollect(articleId);
+                Event e = new Event();
+                e.target = Event.TARGET_MAIN;
+                e.type = Event.TYPE_START_ANIMATION;
+                EventBus.getDefault().post(e);
             } else if (event.type == Event.TYPE_LOGIN) {
                 mList.clear();
                 mPresenter.refresh(mTreeType, 0);
@@ -219,6 +231,10 @@ public class TreeArticleFragment extends BaseFragment<Contract.TreeArticleFragme
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public void onCollect(Collect result, int articleId) {
+        Event e = new Event();
+        e.target = Event.TARGET_MAIN;
+        e.type = Event.TYPE_STOP_ANIMATION;
+        EventBus.getDefault().post(e);
         if (result != null) {
             if (result.getErrorCode() == 0) {
                 mList.stream().filter(a -> a.articleId == articleId).findFirst().get().collect = true;
@@ -232,6 +248,10 @@ public class TreeArticleFragment extends BaseFragment<Contract.TreeArticleFragme
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public void onUnCollect(Collect result, int articleId) {
+        Event e = new Event();
+        e.target = Event.TARGET_MAIN;
+        e.type = Event.TYPE_STOP_ANIMATION;
+        EventBus.getDefault().post(e);
         if (result != null) {
             if (result.getErrorCode() == 0) {
                 mList.stream().filter(a -> a.articleId == articleId).findFirst().get().collect = false;

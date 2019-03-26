@@ -38,6 +38,16 @@ public class Event {
     public static final int TYPE_CHANGE_DAY_NIGHT_MODE = 6;
 
     /**
+     * 开始动画
+     */
+    public static final int TYPE_START_ANIMATION = 7;
+
+    /**
+     * 停止动画
+     */
+    public static final int TYPE_STOP_ANIMATION = 8;
+
+    /**
      * 目标界面-MainActivity
      */
     public static final int TARGET_MAIN = 1;

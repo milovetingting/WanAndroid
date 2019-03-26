@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,6 +45,9 @@ public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView
     @BindView(R.id.register)
     Button mRegister;
 
+    @BindView(R.id.loading)
+    ImageView mLoading;
+
     private Context mContext;
 
     @Override
@@ -61,6 +68,7 @@ public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView
     @Override
     public void onRegister(Register result) {
         LogUtils.i();
+        stopAnim();
         if (result != null) {
             if (result.getErrorCode() == 0) {
                 ToastUtils.showShort(mContext.getString(R.string.register_success));
@@ -86,6 +94,7 @@ public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView
     @Override
     public void onLoadFailed() {
         LogUtils.e();
+        stopAnim();
     }
 
     @OnClick(R.id.back)
@@ -104,5 +113,19 @@ public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView
             return;
         }
         mPresenter.register(mUsername.getText().toString(), mPassword.getText().toString());
+        startAnim();
+    }
+
+    private void startAnim() {
+        mLoading.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.loading);
+        LinearInterpolator li = new LinearInterpolator();
+        animation.setInterpolator(li);
+        mLoading.startAnimation(animation);
+    }
+
+    private void stopAnim() {
+        mLoading.setVisibility(View.GONE);
+        mLoading.clearAnimation();
     }
 }

@@ -235,6 +235,10 @@ public class MainFragment extends BaseFragment<Contract.MainFragmentView, MainFr
     @Override
     public void onLoadFailed() {
         LogUtils.i();
+        Event e = new Event();
+        e.target = Event.TARGET_MAIN;
+        e.type = Event.TYPE_STOP_ANIMATION;
+        EventBus.getDefault().post(e);
         ToastUtils.showShort(mContext.getString(R.string.load_failed));
         mSmartRefreshLayout.finishRefresh();
         mSmartRefreshLayout.finishLoadMore();
@@ -243,6 +247,10 @@ public class MainFragment extends BaseFragment<Contract.MainFragmentView, MainFr
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public void onCollect(Collect result, int articleId) {
+        Event e = new Event();
+        e.target = Event.TARGET_MAIN;
+        e.type = Event.TYPE_STOP_ANIMATION;
+        EventBus.getDefault().post(e);
         if (result != null) {
             if (result.getErrorCode() == 0) {
                 mList.stream().filter(a -> a.articleId == articleId).findFirst().get().collect = true;
@@ -256,6 +264,10 @@ public class MainFragment extends BaseFragment<Contract.MainFragmentView, MainFr
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public void onUnCollect(Collect result, int articleId) {
+        Event e = new Event();
+        e.target = Event.TARGET_MAIN;
+        e.type = Event.TYPE_STOP_ANIMATION;
+        EventBus.getDefault().post(e);
         if (result != null) {
             if (result.getErrorCode() == 0) {
                 mList.stream().filter(a -> a.articleId == articleId).findFirst().get().collect = false;
@@ -272,9 +284,17 @@ public class MainFragment extends BaseFragment<Contract.MainFragmentView, MainFr
             if (event.type == Event.TYPE_COLLECT) {
                 int articleId = Integer.valueOf(event.data);
                 mPresenter.collect(articleId);
+                Event e = new Event();
+                e.target = Event.TARGET_MAIN;
+                e.type = Event.TYPE_START_ANIMATION;
+                EventBus.getDefault().post(e);
             } else if (event.type == Event.TYPE_UNCOLLECT) {
                 int articleId = Integer.valueOf(event.data);
                 mPresenter.unCollect(articleId);
+                Event e = new Event();
+                e.target = Event.TARGET_MAIN;
+                e.type = Event.TYPE_START_ANIMATION;
+                EventBus.getDefault().post(e);
             } else if (event.type == Event.TYPE_LOGIN) {
                 mList.clear();
                 mPresenter.refresh(0);

@@ -9,6 +9,10 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -55,6 +59,9 @@ public class SearchResultActivity extends BaseActivity<Contract.SearchResultActi
 
     @BindView(R.id.loading)
     WaveLoadingView mWaveLoadingView;
+
+    @BindView(R.id.load)
+    ImageView mLoading;
 
     private Context mContext;
 
@@ -132,6 +139,7 @@ public class SearchResultActivity extends BaseActivity<Contract.SearchResultActi
     public void onLoadFailed() {
         LogUtils.i();
         ToastUtils.showShort(mContext.getString(R.string.load_failed));
+        stopAnim();
         mSmartRefreshLayout.finishRefresh();
         mSmartRefreshLayout.finishLoadMore();
     }
@@ -166,6 +174,7 @@ public class SearchResultActivity extends BaseActivity<Contract.SearchResultActi
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public void onCollect(Collect result, int articleId) {
+        stopAnim();
         if (result != null) {
             if (result.getErrorCode() == 0) {
                 mList.stream().filter(a -> a.articleId == articleId).findFirst().get().collect = true;
@@ -179,6 +188,7 @@ public class SearchResultActivity extends BaseActivity<Contract.SearchResultActi
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public void onUnCollect(Collect result, int articleId) {
+        stopAnim();
         if (result != null) {
             if (result.getErrorCode() == 0) {
                 mList.stream().filter(a -> a.articleId == articleId).findFirst().get().collect = false;
@@ -200,9 +210,11 @@ public class SearchResultActivity extends BaseActivity<Contract.SearchResultActi
             if (event.type == Event.TYPE_COLLECT) {
                 int articleId = Integer.valueOf(event.data);
                 mPresenter.collect(articleId);
+                startAnim();
             } else if (event.type == Event.TYPE_UNCOLLECT) {
                 int articleId = Integer.valueOf(event.data);
                 mPresenter.unCollect(articleId);
+                startAnim();
             } else if (event.type == Event.TYPE_LOGIN) {
                 mList.clear();
                 mPresenter.search(mKey, 0);
@@ -211,5 +223,18 @@ public class SearchResultActivity extends BaseActivity<Contract.SearchResultActi
                 mPresenter.search(mKey, 0);
             }
         }
+    }
+
+    private void startAnim() {
+        mLoading.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.loading);
+        LinearInterpolator li = new LinearInterpolator();
+        animation.setInterpolator(li);
+        mLoading.startAnimation(animation);
+    }
+
+    private void stopAnim() {
+        mLoading.setVisibility(View.GONE);
+        mLoading.clearAnimation();
     }
 }

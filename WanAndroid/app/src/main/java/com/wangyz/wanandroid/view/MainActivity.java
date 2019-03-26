@@ -20,6 +20,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,6 +75,9 @@ public class MainActivity extends BaseActivity<Contract.MainActivityView, MainAc
 
     @BindView(R.id.bottom)
     BottomNavigationView mBottomNavigationView;
+
+    @BindView(R.id.loading)
+    ImageView mLoading;
 
     private FragmentManager mFragmentManager;
 
@@ -279,7 +285,12 @@ public class MainActivity extends BaseActivity<Contract.MainActivityView, MainAc
                 showTreeArticle();
             } else if (event.type == Event.TYPE_CHANGE_DAY_NIGHT_MODE) {
                 recreate();
+            } else if (event.type == Event.TYPE_START_ANIMATION) {
+                startAnim();
+            } else if (event.type == Event.TYPE_STOP_ANIMATION) {
+                stopAnim();
             }
+
         }
     }
 
@@ -399,5 +410,18 @@ public class MainActivity extends BaseActivity<Contract.MainActivityView, MainAc
         } else {
             ToastUtils.showShort(getString(R.string.network_not_connect));
         }
+    }
+
+    private void startAnim() {
+        mLoading.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.loading);
+        LinearInterpolator li = new LinearInterpolator();
+        animation.setInterpolator(li);
+        mLoading.startAnimation(animation);
+    }
+
+    private void stopAnim() {
+        mLoading.setVisibility(View.GONE);
+        mLoading.clearAnimation();
     }
 }

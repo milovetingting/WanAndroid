@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,6 +48,9 @@ public class LoginActivity extends BaseActivity<Contract.LoginActivityView, Logi
     @BindView(R.id.go_register)
     Button mRegister;
 
+    @BindView(R.id.loading)
+    ImageView mLoading;
+
     private Context mContext;
 
     @Override
@@ -74,11 +81,13 @@ public class LoginActivity extends BaseActivity<Contract.LoginActivityView, Logi
     @Override
     public void onLoadFailed() {
         LogUtils.e();
+        stopAnim();
     }
 
     @Override
     public void onLogin(Login result) {
         LogUtils.i();
+        stopAnim();
         if (result != null) {
             if (result.getErrorCode() == 0) {
 
@@ -126,6 +135,7 @@ public class LoginActivity extends BaseActivity<Contract.LoginActivityView, Logi
             ToastUtils.showShort(mContext.getString(R.string.complete_info));
             return;
         }
+        startAnim();
         mPresenter.login(mUsername.getText().toString(), mPassword.getText().toString());
     }
 
@@ -134,5 +144,18 @@ public class LoginActivity extends BaseActivity<Contract.LoginActivityView, Logi
         Intent intent = new Intent(this, RegisterActivity.class);
         mContext.startActivity(intent);
         finish();
+    }
+
+    private void startAnim() {
+        mLoading.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.loading);
+        LinearInterpolator li = new LinearInterpolator();
+        animation.setInterpolator(li);
+        mLoading.startAnimation(animation);
+    }
+
+    private void stopAnim() {
+        mLoading.setVisibility(View.GONE);
+        mLoading.clearAnimation();
     }
 }

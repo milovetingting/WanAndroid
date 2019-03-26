@@ -53,8 +53,8 @@
             android:id="@+id/layout_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/bottom_height"
-            android:layout_marginTop="@dimen/head_height" />
+            android:layout_marginTop="@dimen/head_height"
+            android:layout_marginBottom="@dimen/bottom_height" />
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom"
@@ -65,6 +65,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom" />
+
+        <ImageView
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/load"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
