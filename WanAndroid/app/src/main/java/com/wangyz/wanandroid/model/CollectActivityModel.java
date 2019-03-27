@@ -5,9 +5,8 @@ import android.os.Build;
 
 import com.wangyz.wanandroid.base.BaseModel;
 import com.wangyz.wanandroid.bean.db.Collect;
+import com.wangyz.wanandroid.bean.model.AddCollect;
 import com.wangyz.wanandroid.contract.Contract;
-
-import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +35,13 @@ public class CollectActivityModel extends BaseModel implements Contract.CollectA
     }
 
     @Override
-    public Observable<com.wangyz.wanandroid.bean.model.Collect> unCollect(int articleId) {
-        return mApi.unCollect(articleId);
+    public Observable<com.wangyz.wanandroid.bean.model.Collect> unCollect(int articleId, int originId) {
+        return mApi.unCollect(articleId, originId);
+    }
+
+    @Override
+    public Observable<AddCollect> addCollect(String title, String author, String link) {
+        return mApi.addCollect(title, author, link);
     }
 
     @TargetApi(Build.VERSION_CODES.N)
@@ -46,7 +50,8 @@ public class CollectActivityModel extends BaseModel implements Contract.CollectA
             List<Collect> list = new ArrayList<>();
             a.getData().getDatas().stream().forEach(d -> {
                 Collect m = new Collect();
-                m.articleId = d.getOriginId();
+                m.articleId = d.getId();
+                m.originId = d.getOriginId();
                 m.author = d.getAuthor();
                 m.title = d.getTitle();
                 m.category = d.getChapterName();
@@ -54,7 +59,6 @@ public class CollectActivityModel extends BaseModel implements Contract.CollectA
                 m.link = d.getLink();
                 list.add(m);
             });
-            LitePal.saveAll(list);
             return list;
         });
     }

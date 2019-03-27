@@ -4,6 +4,7 @@ import com.wangyz.wanandroid.bean.db.Article;
 import com.wangyz.wanandroid.bean.db.Author;
 import com.wangyz.wanandroid.bean.db.Banner;
 import com.wangyz.wanandroid.bean.db.ProjectCategory;
+import com.wangyz.wanandroid.bean.model.AddCollect;
 import com.wangyz.wanandroid.bean.model.Collect;
 import com.wangyz.wanandroid.bean.model.KeyWord;
 import com.wangyz.wanandroid.bean.model.Login;
@@ -859,9 +860,20 @@ public class Contract {
          * 取消收藏文章
          *
          * @param articleId
+         * @param originId
          * @return
          */
-        Observable<Collect> unCollect(int articleId);
+        Observable<Collect> unCollect(int articleId, int originId);
+
+        /**
+         * 添加站外收藏
+         *
+         * @param title  标题
+         * @param author 作者
+         * @param link   链接
+         * @return
+         */
+        Observable<AddCollect> addCollect(String title, String author, String link);
     }
 
     /**
@@ -889,6 +901,13 @@ public class Contract {
          * @param articleId
          */
         void onUnCollect(Collect result, int articleId);
+
+        /**
+         * 添加站外收藏
+         *
+         * @param result
+         */
+        void onAddCollect(AddCollect result);
     }
 
     /**
@@ -913,8 +932,18 @@ public class Contract {
          * 取消收藏文章
          *
          * @param articleId
+         * @param originId
          */
-        void unCollect(int articleId);
+        void unCollect(int articleId, int originId);
+
+        /**
+         * 添加站外收藏
+         *
+         * @param title
+         * @param author
+         * @param link
+         */
+        void addCollect(String title, String author, String link);
     }
 
     /**

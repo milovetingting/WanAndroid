@@ -138,6 +138,7 @@ public class TreeArticleFragment extends BaseFragment<Contract.TreeArticleFragme
         e.target = Event.TARGET_MAIN;
         e.type = Event.TYPE_STOP_ANIMATION;
         EventBus.getDefault().post(e);
+        mWaveLoadingView.setVisibility(View.GONE);
         mSmartRefreshLayout.finishRefresh();
         mSmartRefreshLayout.finishLoadMore();
     }

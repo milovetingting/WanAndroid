@@ -240,6 +240,7 @@ public class MainFragment extends BaseFragment<Contract.MainFragmentView, MainFr
         e.type = Event.TYPE_STOP_ANIMATION;
         EventBus.getDefault().post(e);
         ToastUtils.showShort(mContext.getString(R.string.load_failed));
+        mWaveLoadingView.setVisibility(View.GONE);
         mSmartRefreshLayout.finishRefresh();
         mSmartRefreshLayout.finishLoadMore();
     }

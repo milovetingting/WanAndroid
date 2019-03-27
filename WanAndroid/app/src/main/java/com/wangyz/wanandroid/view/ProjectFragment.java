@@ -98,6 +98,7 @@ public class ProjectFragment extends BaseFragment<Contract.ProjectFragmentView, 
     @Override
     public void onLoadFailed() {
         LogUtils.e();
+        mWaveLoadingView.setVisibility(View.GONE);
     }
 
     @TargetApi(Build.VERSION_CODES.N)

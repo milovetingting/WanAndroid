@@ -99,6 +99,7 @@ public class WxFragment extends BaseFragment<Contract.WxFragmentView, WxFragment
     @Override
     public void onLoadFailed() {
         LogUtils.e();
+        mWaveLoadingView.setVisibility(View.GONE);
     }
 
     @TargetApi(Build.VERSION_CODES.N)

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,8 +68,16 @@ public class CollectArticleAdapter extends RecyclerView.Adapter<CollectArticleAd
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Collect model = mList.get(i);
         viewHolder.title.setText(StringEscapeUtils.unescapeHtml4(model.title));
-        viewHolder.author.setText(mContext.getResources().getString(R.string.author) + StringEscapeUtils.unescapeHtml4(model.author));
-        viewHolder.category.setText(mContext.getResources().getString(R.string.category) + StringEscapeUtils.unescapeHtml4(model.category));
+        if (TextUtils.isEmpty(model.author)) {
+            viewHolder.title.setText(R.string.none);
+        } else {
+            viewHolder.author.setText(mContext.getResources().getString(R.string.author) + StringEscapeUtils.unescapeHtml4(model.author));
+        }
+        if (TextUtils.isEmpty(model.category)) {
+            viewHolder.category.setText(mContext.getResources().getString(R.string.category) + mContext.getResources().getString(R.string.none));
+        } else {
+            viewHolder.category.setText(mContext.getResources().getString(R.string.category) + StringEscapeUtils.unescapeHtml4(model.category));
+        }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(model.time);
         viewHolder.time.setText(sdf.format(date));
@@ -89,11 +98,12 @@ public class CollectArticleAdapter extends RecyclerView.Adapter<CollectArticleAd
                 Event event = new Event();
                 event.target = Event.TARGET_COLLECT;
                 event.type = Event.TYPE_UNCOLLECT;
-                event.data = model.articleId + "";
+                event.data = model.articleId + ";" + model.originId;
                 EventBus.getDefault().post(event);
             }
 
         });
+
         if (mNightMode) {
             viewHolder.cardView.setBackgroundColor(mContext.getResources().getColor(mNightMode ? R.color.card_night_bg : R.color.card_bg));
         }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:padding="@dimen/dialog_update_padding">
+
+    <TextView
+        android:id="@+id/dialog_add_collect_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="添加站外收藏" />
+
+    <EditText
+        android:id="@+id/dialog_add_collect_et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="*请输入标题"
+        android:textSize="@dimen/search_et_textSize"
+        app:layout_constraintTop_toBottomOf="@id/dialog_add_collect_tv_title" />
+
+    <EditText
+        android:id="@+id/dialog_add_collect_et_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入作者"
+        android:textSize="@dimen/search_et_textSize"
+        app:layout_constraintTop_toBottomOf="@id/dialog_add_collect_et_title" />
+
+    <EditText
+        android:id="@+id/dialog_add_collect_et_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="*请输入链接"
+        android:textSize="@dimen/search_et_textSize"
+        app:layout_constraintTop_toBottomOf="@id/dialog_add_collect_et_author" />
+
+    <Button
+        android:id="@+id/dialog_add_collect_btn_cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dialog_update_btn_margin"
+        android:layout_marginEnd="@dimen/dialog_update_btn_margin"
+        android:background="@drawable/later_button_bg"
+        android:text="@string/cancel"
+        android:textColor="@color/dialog_update_later_textColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/dialog_add_collect_btn_commit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_add_collect_et_link" />
+
+    <Button
+        android:id="@+id/dialog_add_collect_btn_commit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dialog_update_btn_margin"
+        android:layout_marginStart="@dimen/dialog_update_btn_margin"
+        android:background="@drawable/update_button_bg"
+        android:text="@string/ok"
+        android:textColor="@color/dialog_update_now_textColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dialog_add_collect_btn_cancel"
+        app:layout_constraintTop_toBottomOf="@id/dialog_add_collect_et_link" />
+
+
+</android.support.constraint.ConstraintLayout>

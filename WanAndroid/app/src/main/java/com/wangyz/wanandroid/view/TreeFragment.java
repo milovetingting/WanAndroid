@@ -122,6 +122,7 @@ public class TreeFragment extends BaseFragment<Contract.TreeFragmentView, TreeFr
     public void onLoadFailed() {
         LogUtils.e();
         ToastUtils.showShort(mContext.getString(R.string.load_failed));
+        mWaveLoadingView.setVisibility(View.GONE);
         mSmartRefreshLayout.finishRefresh();
     }
 }

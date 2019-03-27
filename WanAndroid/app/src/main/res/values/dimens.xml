@@ -42,4 +42,5 @@
     <dimen name="dialog_update_content_height">200dp</dimen>
     <dimen name="dialog_update_content_marginTop">5dp</dimen>
     <dimen name="dialog_update_btn_margin">5dp</dimen>
+    <dimen name="dialog_option_height">250dp</dimen>
 </resources>

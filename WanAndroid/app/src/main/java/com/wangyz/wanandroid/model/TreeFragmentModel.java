@@ -3,7 +3,6 @@ package com.wangyz.wanandroid.model;
 import android.annotation.TargetApi;
 import android.os.Build;
 
-import com.blankj.utilcode.util.NetworkUtils;
 import com.wangyz.wanandroid.base.BaseModel;
 import com.wangyz.wanandroid.bean.db.Tree;
 import com.wangyz.wanandroid.bean.model.TreeInfo;
@@ -42,12 +41,8 @@ public class TreeFragmentModel extends BaseModel implements Contract.TreeFragmen
             }
             emitter.onComplete();
         });
-        if (NetworkUtils.isConnected()) {
-            Observable<List<TreeInfo>> loadFromNet = doLoadFromNet();
-            return Observable.concat(loadFromLocal, loadFromNet);
-        } else {
-            return loadFromLocal;
-        }
+        Observable<List<TreeInfo>> loadFromNet = doLoadFromNet();
+        return Observable.concat(loadFromLocal, loadFromNet);
     }
 
     @Override

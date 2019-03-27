@@ -13,6 +13,8 @@ public class Collect extends LitePalSupport {
 
     public int articleId;
 
+    public int originId;
+
     public String author;
 
     public String title;

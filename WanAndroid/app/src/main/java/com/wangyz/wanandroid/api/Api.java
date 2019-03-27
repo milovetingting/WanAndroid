@@ -1,6 +1,7 @@
 package com.wangyz.wanandroid.api;
 
 import com.wangyz.wanandroid.ConstantValue;
+import com.wangyz.wanandroid.bean.model.AddCollect;
 import com.wangyz.wanandroid.bean.model.Article;
 import com.wangyz.wanandroid.bean.model.Author;
 import com.wangyz.wanandroid.bean.model.Banner;
@@ -168,6 +169,16 @@ public interface Api {
     Observable<Collect> unCollect(@Path("id") int id);
 
     /**
+     * 取消收藏文章(包含自己录入的内容)
+     *
+     * @param id
+     * @param originId
+     * @return
+     */
+    @POST(ConstantValue.URL_UNCOLLECT_INCLUDE_ADD)
+    Observable<Collect> unCollect(@Path("id") int id, @Query("originId") int originId);
+
+    /**
      * 获取收藏文章列表
      *
      * @param page
@@ -175,6 +186,17 @@ public interface Api {
      */
     @GET(ConstantValue.URL_COLLECT_LIST)
     Observable<CollectInfo> loadCollect(@Path("page") int page);
+
+    /**
+     * 添加站外收藏
+     *
+     * @param title
+     * @param author
+     * @param link
+     * @return
+     */
+    @POST(ConstantValue.URL_ADD_COLLECT)
+    Observable<AddCollect> addCollect(@Query("title") String title, @Query("author") String author, @Query("link") String link);
 
     /**
      * 获取搜索热词

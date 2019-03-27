@@ -103,9 +103,19 @@ public class ConstantValue {
     public static final String URL_UNCOLLECT = "/lg/uncollect_originId/{id}/json";
 
     /**
+     * 取消收藏文章的url(包含自己录入的内容)
+     */
+    public static final String URL_UNCOLLECT_INCLUDE_ADD = "/lg/uncollect/{id}/json";
+
+    /**
      * 收藏文章列表的url
      */
     public static final String URL_COLLECT_LIST = "/lg/collect/list/{page}/json";
+
+    /**
+     * 添加站外收藏
+     */
+    public static final String URL_ADD_COLLECT = "/lg/collect/add/json";
 
     /**
      * 搜索热词的url

@@ -1,16 +1,25 @@
 package com.wangyz.wanandroid.view;
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +31,7 @@ import com.wangyz.wanandroid.adapter.CollectArticleAdapter;
 import com.wangyz.wanandroid.base.BaseActivity;
 import com.wangyz.wanandroid.bean.db.Collect;
 import com.wangyz.wanandroid.bean.event.Event;
+import com.wangyz.wanandroid.bean.model.AddCollect;
 import com.wangyz.wanandroid.contract.Contract;
 import com.wangyz.wanandroid.custom.SpaceItemDecoration;
 import com.wangyz.wanandroid.presenter.CollectActivityPresenter;
@@ -62,6 +72,11 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
 
     @BindView(R.id.load)
     ImageView mLoading;
+
+    @BindView(R.id.add)
+    ImageView mAdd;
+
+    private Dialog mAddCollectDialog;
 
     private Context mContext;
 
@@ -130,6 +145,9 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
         LogUtils.e();
         ToastUtils.showShort(mContext.getString(R.string.load_failed));
         stopAnim();
+        if (mAddCollectDialog != null && mAddCollectDialog.isShowing()) {
+            mAddCollectDialog.dismiss();
+        }
         mSmartRefreshLayout.finishRefresh();
         mSmartRefreshLayout.finishLoadMore();
     }
@@ -196,12 +214,31 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
         }
     }
 
+    @Override
+    public void onAddCollect(AddCollect result) {
+        stopAnim();
+        mAddCollectDialog.dismiss();
+        if (result != null && result.getErrorCode() == 0) {
+            AddCollect.DataBean bean = result.getData();
+            Collect collect = new Collect();
+            collect.articleId = bean.getId();
+            collect.author = bean.getAuthor();
+            collect.link = bean.getLink();
+            collect.time = bean.getPublishTime();
+            collect.title = bean.getTitle();
+            mList.add(0, collect);
+            mAdapter.setList(mList);
+            mEmpty.setVisibility(View.GONE);
+        }
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(Event event) {
         if (event.target == Event.TARGET_COLLECT) {
             if (event.type == Event.TYPE_UNCOLLECT) {
-                int articleId = Integer.valueOf(event.data);
-                mPresenter.unCollect(articleId);
+                int articleId = Integer.valueOf(event.data.split(";")[0]);
+                int originId = Integer.valueOf(event.data.split(";")[1]);
+                mPresenter.unCollect(articleId, originId);
                 startAnim();
             }
         }
@@ -210,6 +247,42 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
     @OnClick(R.id.back)
     public void back() {
         finish();
+    }
+
+    @OnClick(R.id.add)
+    public void add() {
+        mAddCollectDialog = new Dialog(this);
+        mAddCollectDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        mAddCollectDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mAddCollectDialog.show();
+
+        Window window = mAddCollectDialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        window.getDecorView().setPadding(20, 0, 20, 20);
+        window.setAttributes(layoutParams);
+
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_add_collect, null, false);
+        window.setContentView(view);
+
+        EditText title = view.findViewById(R.id.dialog_add_collect_et_title);
+        EditText author = view.findViewById(R.id.dialog_add_collect_et_author);
+        EditText link = view.findViewById(R.id.dialog_add_collect_et_link);
+
+        Button cancel = view.findViewById(R.id.dialog_add_collect_btn_cancel);
+        Button ok = view.findViewById(R.id.dialog_add_collect_btn_commit);
+        cancel.setOnClickListener(v -> {
+            mAddCollectDialog.dismiss();
+        });
+        ok.setOnClickListener(v -> {
+            if (TextUtils.isEmpty(title.getText().toString()) || TextUtils.isEmpty(link.getText().toString())) {
+                ToastUtils.showShort(mContext.getString(R.string.author_link_empty));
+                return;
+            }
+            mPresenter.addCollect(title.getText().toString(), author.getText().toString(), link.getText().toString());
+            startAnim();
+        });
     }
 
     private void startAnim() {

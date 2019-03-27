@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:padding="@dimen/dialog_update_padding">
+
+    <com.wangyz.wanandroid.custom.CustomGridView
+        android:id="@+id/dialog_gv_options"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_option_height"
+        android:background="@null"
+        android:gravity="center"
+        android:numColumns="4"
+        android:stretchMode="columnWidth" />
+
+</android.support.constraint.ConstraintLayout>

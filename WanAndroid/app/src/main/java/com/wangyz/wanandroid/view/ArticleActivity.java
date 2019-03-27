@@ -1,9 +1,16 @@
 package com.wangyz.wanandroid.view;
 
-import android.content.Intent;
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,11 +19,19 @@ import com.blankj.utilcode.util.LogUtils;
 import com.just.agentweb.AgentWeb;
 import com.wangyz.wanandroid.ConstantValue;
 import com.wangyz.wanandroid.R;
+import com.wangyz.wanandroid.adapter.OptionAdapter;
 import com.wangyz.wanandroid.base.BaseActivity;
+import com.wangyz.wanandroid.bean.model.Option;
 import com.wangyz.wanandroid.contract.Contract;
+import com.wangyz.wanandroid.custom.CustomGridView;
 import com.wangyz.wanandroid.presenter.ArticleActivityPresenter;
+import com.wangyz.wanandroid.strategy.OptionStrategy;
+import com.wangyz.wanandroid.strategy.OptionStrategyFactory;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,8 +49,8 @@ public class ArticleActivity extends BaseActivity<Contract.ArticleActivityView, 
     @BindView(R.id.title)
     TextView mTitle;
 
-    @BindView(R.id.share)
-    ImageView mShare;
+    @BindView(R.id.more)
+    ImageView mMore;
 
     private String mLink;
 
@@ -43,6 +58,14 @@ public class ArticleActivity extends BaseActivity<Contract.ArticleActivityView, 
     LinearLayout mLinearLayout;
 
     private AgentWeb mAgentWeb;
+
+    private Context mContext;
+
+    private OptionAdapter mAdapter;
+
+    private List<String> mTitles;
+
+    private List<Integer> mDrawableIds;
 
     @Override
     protected void onResume() {
@@ -75,6 +98,7 @@ public class ArticleActivity extends BaseActivity<Contract.ArticleActivityView, 
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        mContext = getApplicationContext();
         mLink = getIntent().getStringExtra(ConstantValue.KEY_LINK);
         if (TextUtils.isEmpty(mLink)) {
             return;
@@ -122,12 +146,52 @@ public class ArticleActivity extends BaseActivity<Contract.ArticleActivityView, 
         finish();
     }
 
-    @OnClick(R.id.share)
-    public void share() {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, mTitle.getText() + "\n" + mLink);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(Intent.createChooser(intent, "Share"));
+    @OnClick(R.id.more)
+    public void more() {
+        Dialog dialog = new Dialog(this);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
+
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        window.setAttributes(layoutParams);
+
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_more, null, false);
+        window.setContentView(view);
+
+        CustomGridView gridView = view.findViewById(R.id.dialog_gv_options);
+
+        if (mAdapter == null) {
+            mTitles = new ArrayList<>();
+            mTitles.add(mContext.getString(R.string.share));
+            mTitles.add(mContext.getString(R.string.copy_link));
+            mTitles.add(mContext.getString(R.string.browser));
+
+            mDrawableIds = new ArrayList<>();
+            mDrawableIds.add(R.drawable.share);
+            mDrawableIds.add(R.drawable.link);
+            mDrawableIds.add(R.drawable.browser);
+
+        }
+
+        mAdapter = new OptionAdapter(mContext, mTitles, mDrawableIds);
+        gridView.setAdapter(mAdapter);
+
+        gridView.setOnItemClickListener((parent, view1, position, id) -> {
+            Option option = new Option();
+            option.title = mTitle.getText().toString();
+            option.link = mLink;
+            OptionStrategy strategy = OptionStrategyFactory.getStrategy(position);
+            if (strategy != null) {
+                strategy.handleOption(option);
+            } else {
+                LogUtils.e("strategy=null");
+            }
+            dialog.dismiss();
+        });
+
     }
 }
