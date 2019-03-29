@@ -86,12 +86,14 @@ public class ProjectArticleAdapter extends RecyclerView.Adapter<ProjectArticleAd
             Intent intent = new Intent(mContext, ArticleActivity.class);
             intent.putExtra(ConstantValue.KEY_LINK, model.link);
             intent.putExtra(ConstantValue.KEY_TITLE, model.title);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(intent);
         });
 
         viewHolder.collect.setOnClickListener(v -> {
             if (!LoginUtil.isLogin()) {
                 Intent intent = new Intent(mContext, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             } else {
                 Event event = new Event();

@@ -197,4 +197,14 @@ public class ConstantValue {
      */
     public static final int DEFAULT_TIMEOUT = 15;
 
+    /**
+     * extra-key
+     */
+    public static final String EXTRA_KEY_REFERRER = "referrer";
+
+    /**
+     * extra-value
+     */
+    public static final String EXTRA_VALUE_COLLECT = "collect";
+
 }

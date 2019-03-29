@@ -238,7 +238,7 @@ public class MainActivity extends BaseActivity<Contract.MainActivityView, MainAc
     @OnClick(R.id.search)
     public void search() {
         Intent intent = new Intent(mContext, SearchActivity.class);
-        mContext.startActivity(intent);
+        startActivity(intent);
     }
 
     private void switchFragment(int containerId, Fragment fragment) {

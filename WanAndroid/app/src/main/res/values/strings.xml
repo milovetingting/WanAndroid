@@ -57,4 +57,11 @@
     <string name="copy_finish">已复制到剪贴板</string>
     <string name="browser">在浏览器中打开</string>
 
+    <string name="shortcuts_disabled">不可用</string>
+    <string name="shortcuts_search">搜索</string>
+    <string name="shortcuts_search_full">搜索文章</string>
+    <string name="shortcuts_favorite">收藏列表</string>
+    <string name="shortcuts_favorite_full">收藏列表</string>
+
+
 </resources>

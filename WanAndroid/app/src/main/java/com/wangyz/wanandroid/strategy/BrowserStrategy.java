@@ -16,6 +16,7 @@ public class BrowserStrategy implements OptionStrategy {
     public void handleOption(Option option) {
         Uri uri = Uri.parse(option.link);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Utils.getApp().startActivity(intent);
     }
 }

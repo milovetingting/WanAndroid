@@ -96,7 +96,7 @@ public class SettingActivity extends BaseActivity<Contract.SettingActivityView, 
         Intent intent = new Intent(mContext, ArticleActivity.class);
         intent.putExtra(ConstantValue.KEY_LINK, ConstantValue.URL_FEEDBACK);
         intent.putExtra(ConstantValue.KEY_TITLE, mContext.getString(R.string.feedback));
-        mContext.startActivity(intent);
+        startActivity(intent);
     }
 
     @OnClick(R.id.about)

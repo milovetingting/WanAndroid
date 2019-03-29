@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.wangyz.wanandroid.ConstantValue;
 import com.wangyz.wanandroid.R;
 import com.wangyz.wanandroid.base.BaseActivity;
 import com.wangyz.wanandroid.bean.model.Register;
@@ -50,6 +51,8 @@ public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView
 
     private Context mContext;
 
+    private String mReferrer;
+
     @Override
     protected int getContentViewId() {
         return R.layout.activity_register;
@@ -58,6 +61,11 @@ public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView
     @Override
     protected void init(Bundle savedInstanceState) {
         mContext = getApplicationContext();
+        try {
+            mReferrer = getIntent().getExtras().getString(ConstantValue.EXTRA_KEY_REFERRER);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -73,7 +81,10 @@ public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView
             if (result.getErrorCode() == 0) {
                 ToastUtils.showShort(mContext.getString(R.string.register_success));
                 Intent intent = new Intent(mContext, LoginActivity.class);
-                mContext.startActivity(intent);
+                if (!TextUtils.isEmpty(mReferrer)) {
+                    intent.putExtra(ConstantValue.EXTRA_KEY_REFERRER, mReferrer);
+                }
+                startActivity(intent);
                 finish();
             } else {
                 ToastUtils.showShort(result.getErrorMsg());

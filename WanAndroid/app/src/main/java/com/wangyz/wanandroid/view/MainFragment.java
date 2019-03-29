@@ -107,6 +107,7 @@ public class MainFragment extends BaseFragment<Contract.MainFragmentView, MainFr
             Intent intent = new Intent(mContext, ArticleActivity.class);
             intent.putExtra(ConstantValue.KEY_LINK, mUrls.get(i));
             intent.putExtra(ConstantValue.KEY_TITLE, mTitles.get(i));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(intent);
         });
 

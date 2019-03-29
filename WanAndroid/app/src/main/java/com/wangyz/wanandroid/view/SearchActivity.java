@@ -104,7 +104,7 @@ public class SearchActivity extends BaseActivity<Contract.SearchActivityView, Se
             mTag.setOnTagClickListener((view, i, flowLayout) -> {
                 Intent intent = new Intent(mContext, SearchResultActivity.class);
                 intent.putExtra(ConstantValue.KEY_KEYOWRD, mHotKeyList.get(i));
-                mContext.startActivity(intent);
+                startActivity(intent);
                 return true;
             });
         }
@@ -123,6 +123,6 @@ public class SearchActivity extends BaseActivity<Contract.SearchActivityView, Se
         }
         Intent intent = new Intent(mContext, SearchResultActivity.class);
         intent.putExtra(ConstantValue.KEY_KEYOWRD, mKeyWord.getText().toString());
-        mContext.startActivity(intent);
+        startActivity(intent);
     }
 }

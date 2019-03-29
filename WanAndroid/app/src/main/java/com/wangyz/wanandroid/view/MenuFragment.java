@@ -108,6 +108,7 @@ public class MenuFragment extends BaseFragment<Contract.MenuFragmentView, MenuFr
     @OnClick(R.id.login)
     public void login() {
         Intent intent = new Intent(mContext, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
     }
 
@@ -119,12 +120,14 @@ public class MenuFragment extends BaseFragment<Contract.MenuFragmentView, MenuFr
     @OnClick(R.id.collect)
     public void goCollectList() {
         Intent intent = new Intent(mContext, CollectActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
     }
 
     @OnClick(R.id.settings)
     public void setting() {
         Intent intent = new Intent(mContext, SettingActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
     }
 

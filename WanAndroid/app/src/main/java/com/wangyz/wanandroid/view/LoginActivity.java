@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.wangyz.wanandroid.ConstantValue;
 import com.wangyz.wanandroid.R;
 import com.wangyz.wanandroid.base.BaseActivity;
 import com.wangyz.wanandroid.bean.event.Event;
@@ -53,6 +54,8 @@ public class LoginActivity extends BaseActivity<Contract.LoginActivityView, Logi
 
     private Context mContext;
 
+    private String mReferrer;
+
     @Override
     protected int getContentViewId() {
         return R.layout.activity_login;
@@ -61,6 +64,11 @@ public class LoginActivity extends BaseActivity<Contract.LoginActivityView, Logi
     @Override
     protected void init(Bundle savedInstanceState) {
         mContext = getApplicationContext();
+        try {
+            mReferrer = getIntent().getExtras().getString(ConstantValue.EXTRA_KEY_REFERRER);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -118,6 +126,12 @@ public class LoginActivity extends BaseActivity<Contract.LoginActivityView, Logi
                 EventBus.getDefault().post(menuEvent);
 
                 finish();
+
+                if (TextUtils.equals(ConstantValue.EXTRA_VALUE_COLLECT, mReferrer)) {
+                    Intent intent = new Intent(mContext, CollectActivity.class);
+                    startActivity(intent);
+                }
+
             } else {
                 ToastUtils.showShort(result.getErrorMsg());
             }
@@ -142,7 +156,10 @@ public class LoginActivity extends BaseActivity<Contract.LoginActivityView, Logi
     @OnClick(R.id.go_register)
     public void register() {
         Intent intent = new Intent(this, RegisterActivity.class);
-        mContext.startActivity(intent);
+        if (!TextUtils.isEmpty(mReferrer)) {
+            intent.putExtra(ConstantValue.EXTRA_KEY_REFERRER, mReferrer);
+        }
+        startActivity(intent);
         finish();
     }
 

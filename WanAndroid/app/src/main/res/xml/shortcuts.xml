@@ -1,0 +1,28 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/search"
+        android:shortcutDisabledMessage="@string/shortcuts_disabled"
+        android:shortcutId="search"
+        android:shortcutLongLabel="@string/shortcuts_search_full"
+        android:shortcutShortLabel="@string/shortcuts_search">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.wangyz.wanandroid.view.SearchActivity"
+            android:targetPackage="com.wangyz.wanandroid" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/favorite"
+        android:shortcutDisabledMessage="@string/shortcuts_disabled"
+        android:shortcutId="favorite"
+        android:shortcutLongLabel="@string/shortcuts_favorite_full"
+        android:shortcutShortLabel="@string/shortcuts_favorite">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.wangyz.wanandroid.view.CollectActivity"
+            android:targetPackage="com.wangyz.wanandroid" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>

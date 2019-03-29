@@ -3,6 +3,7 @@ package com.wangyz.wanandroid.view;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.wangyz.wanandroid.ConstantValue;
 import com.wangyz.wanandroid.R;
 import com.wangyz.wanandroid.adapter.CollectArticleAdapter;
 import com.wangyz.wanandroid.base.BaseActivity;
@@ -35,6 +37,7 @@ import com.wangyz.wanandroid.bean.model.AddCollect;
 import com.wangyz.wanandroid.contract.Contract;
 import com.wangyz.wanandroid.custom.SpaceItemDecoration;
 import com.wangyz.wanandroid.presenter.CollectActivityPresenter;
+import com.wangyz.wanandroid.util.LoginUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -100,6 +103,15 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
     @Override
     protected void init(Bundle savedInstanceState) {
         mContext = getApplicationContext();
+
+        if (!LoginUtil.isLogin()) {
+            Intent intent = new Intent(mContext, LoginActivity.class);
+            intent.putExtra(ConstantValue.EXTRA_KEY_REFERRER, ConstantValue.EXTRA_VALUE_COLLECT);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         EventBus.getDefault().register(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
