@@ -22,12 +22,15 @@ public class ReadCookieInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Response response = chain.proceed(chain.request());
         Request.Builder builder = chain.request().newBuilder();
-        String cookies = SPUtils.getInstance(ConstantValue.CONFIG_COOKIE).getString(ConstantValue.KEY_USER);
-        if (!TextUtils.isEmpty(cookies)) {
-            for (String cookie : cookies.split(";")) {
-                builder.addHeader("Cookie", cookie);
+        long expire = SPUtils.getInstance(ConstantValue.CONFIG_COOKIE).getLong(ConstantValue.CONFIG_COOKIE_EXPIRE, 0);
+        if (expire > System.currentTimeMillis()) {
+            String cookies = SPUtils.getInstance(ConstantValue.CONFIG_COOKIE).getString(ConstantValue.KEY_USER);
+            if (!TextUtils.isEmpty(cookies)) {
+                for (String cookie : cookies.split(";")) {
+                    builder.addHeader("Cookie", cookie);
+                }
+                return chain.proceed(builder.build());
             }
-            return chain.proceed(builder.build());
         }
         return response;
     }

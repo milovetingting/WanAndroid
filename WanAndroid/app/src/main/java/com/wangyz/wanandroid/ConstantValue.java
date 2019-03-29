@@ -163,6 +163,11 @@ public class ConstantValue {
     public static final String KEY_USER = "user";
 
     /**
+     * key-cookie-username
+     */
+    public static final String KEY_USER_COOKIE = "loginUserName";
+
+    /**
      * 设置文件的保存名称
      */
     public static final String CONFIG_SETTINGS = "settings";
@@ -171,6 +176,16 @@ public class ConstantValue {
      * Cookie文件的保存名称
      */
     public static final String CONFIG_COOKIE = "cookie";
+
+    /**
+     * Cookie过期时间
+     */
+    public static final String CONFIG_COOKIE_EXPIRE = "cookie_expire";
+
+    /**
+     * 最大有效期(ms),默认距离上次30天
+     */
+    public static final long TIME_MAX_EXPIRE = 30 * 24 * 3600 * 1000L;
 
     /**
      * 搜索结果正则表达式

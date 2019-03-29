@@ -37,6 +37,7 @@ public class WriteCookieInterceptor implements Interceptor {
                     sb.append(h).append(";");
                 });
                 SPUtils.getInstance(ConstantValue.CONFIG_COOKIE).put(ConstantValue.KEY_USER, sb.toString());
+                SPUtils.getInstance(ConstantValue.CONFIG_COOKIE).put(ConstantValue.CONFIG_COOKIE_EXPIRE, System.currentTimeMillis() + ConstantValue.TIME_MAX_EXPIRE);
             }
         }
         return response;
