@@ -31,6 +31,8 @@
 > 
 > 增加更新功能。
 
+---
+
 ### 简介
 
 基于[WanAndroid](http://www.wanandroid.com/ "WanAndroid")开放[API](http://www.wanandroid.com/blog/show/2 "API")开发的技术文章阅读App。主要功能包括：首页、体系、项目、公众号、搜索、登录、收藏、夜间模式等。
