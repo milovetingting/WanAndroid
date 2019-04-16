@@ -59,7 +59,8 @@ import permissions.dispatcher.RuntimePermissions;
  * @author wangyz
  */
 @RuntimePermissions
-public class MainActivity extends BaseActivity<Contract.MainActivityView, MainActivityPresenter> implements Contract.MainActivityView {
+public class MainActivity extends BaseActivity<Contract.MainActivityView, MainActivityPresenter>
+        implements Contract.MainActivityView {
 
     @BindView(R.id.drawer)
     DrawerLayout mDrawerLayout;
@@ -200,15 +201,18 @@ public class MainActivity extends BaseActivity<Contract.MainActivityView, MainAc
     }
 
 
-    @NeedsPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    @NeedsPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission
+            .WRITE_EXTERNAL_STORAGE})
     void requestPermission() {
 
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+        MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode,
+                grantResults);
     }
 
     @Override
@@ -258,7 +262,8 @@ public class MainActivity extends BaseActivity<Contract.MainActivityView, MainAc
         if (mTreeArticleFragment.isAdded()) {
             mTransaction.hide(mCurrentFragment).show(mTreeArticleFragment).commit();
         } else {
-            mTransaction.hide(mCurrentFragment).add(R.id.layout_main, mTreeArticleFragment).addToBackStack("tree").commit();
+            mTransaction.hide(mCurrentFragment).add(R.id.layout_main, mTreeArticleFragment)
+                    .addToBackStack("tree").commit();
         }
         mCurrentFragment = mTreeArticleFragment;
         childFragment = true;
@@ -326,7 +331,8 @@ public class MainActivity extends BaseActivity<Contract.MainActivityView, MainAc
     public void onDownload() {
         LogUtils.i("finish download");
         NotificationUtils.cancleNotification(1);
-        AppUtils.installApp(new File(mContext.getExternalFilesDir(null), ConstantValue.UPDATE_NAME));
+        AppUtils.installApp(new File(mContext.getExternalFilesDir(null), ConstantValue
+                .UPDATE_NAME));
     }
 
     private void showUpdate(Update info) {
@@ -363,7 +369,8 @@ public class MainActivity extends BaseActivity<Contract.MainActivityView, MainAc
             if (file.exists()) {
                 String md5 = MD5Utils.getFileMD5(file.getAbsolutePath());
                 if (TextUtils.equals(info.getMD5(), md5)) {
-                    AppUtils.installApp(new File(mContext.getExternalFilesDir(null), ConstantValue.UPDATE_NAME));
+                    AppUtils.installApp(new File(mContext.getExternalFilesDir(null),
+                            ConstantValue.UPDATE_NAME));
                 } else {
                     download();
                 }

@@ -31,11 +31,13 @@ public class NotificationUtils {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private static Notification.Builder getNotificationBuilder(String title, String content, String channelId) {
+    private static Notification.Builder getNotificationBuilder(String title, String content,
+                                                               String channelId) {
         //大于8.0
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //id随便指定
-            NotificationChannel channel = new NotificationChannel(channelId, Utils.getApp().getPackageName(), NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel(channelId, Utils.getApp()
+                    .getPackageName(), NotificationManager.IMPORTANCE_DEFAULT);
             //闪光
             channel.enableLights(true);
             //锁屏显示通知
@@ -52,14 +54,19 @@ public class NotificationUtils {
             //通知管理者创建的渠道
             getManager().createNotificationChannel(channel);
 
+            return new Notification.Builder(Utils.getApp()).setAutoCancel(true).setChannelId
+                    (channelId)
+                    .setContentTitle(title)
+                    .setContentText(content).setSmallIcon(R.drawable.icon);
         }
-        return new Notification.Builder(Utils.getApp()).setAutoCancel(true).setChannelId(channelId)
+        return new Notification.Builder(Utils.getApp()).setAutoCancel(true)
                 .setContentTitle(title)
                 .setContentText(content).setSmallIcon(R.drawable.icon);
     }
 
     @TargetApi(Build.VERSION_CODES.O)
-    public static void showNotification(String title, String content, int manageId, String channelId, int progress, int maxProgress) {
+    public static void showNotification(String title, String content, int manageId, String
+            channelId, int progress, int maxProgress) {
         final Notification.Builder builder = getNotificationBuilder(title, content, channelId);
         builder.setOnlyAlertOnce(true);
         builder.setDefaults(Notification.FLAG_ONLY_ALERT_ONCE);
