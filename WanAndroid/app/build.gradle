@@ -6,8 +6,8 @@ android {
         applicationId "com.wangyz.wanandroid"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 9
-        versionName "1.0.8"
+        versionCode 10
+        versionName "1.0.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
