@@ -17,7 +17,8 @@ import io.reactivex.schedulers.Schedulers;
  * @time 2019/1/28 17:21
  * @description SearchResultActivityPresenter
  */
-public class SearchResultActivityPresenter extends BasePresenter<Contract.SearchResultActivityView> implements Contract.SearchResultActivityPresenter {
+public class SearchResultActivityPresenter extends BasePresenter<Contract
+        .SearchResultActivityView> implements Contract.SearchResultActivityPresenter {
 
     private Contract.SearchResultActivityModel mModel;
 
@@ -33,7 +34,8 @@ public class SearchResultActivityPresenter extends BasePresenter<Contract.Search
         } else {
             return;
         }
-        mModel.search(key, page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<SearchResult>() {
+        mModel.search(key, page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers
+                .mainThread()).subscribe(new Observer<SearchResult>() {
             @Override
             public void onSubscribe(Disposable d) {
                 LogUtils.i();
@@ -51,6 +53,9 @@ public class SearchResultActivityPresenter extends BasePresenter<Contract.Search
             @Override
             public void onError(Throwable e) {
                 LogUtils.e(e.getMessage());
+                if (isViewAttached()) {
+                    getView().onLoadFailed();
+                }
             }
 
             @Override
@@ -67,7 +72,8 @@ public class SearchResultActivityPresenter extends BasePresenter<Contract.Search
         } else {
             return;
         }
-        mModel.collect(articleId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Collect>() {
+        mModel.collect(articleId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers
+                .mainThread()).subscribe(new Observer<Collect>() {
             @Override
             public void onSubscribe(Disposable d) {
                 LogUtils.i();
@@ -105,7 +111,8 @@ public class SearchResultActivityPresenter extends BasePresenter<Contract.Search
         } else {
             return;
         }
-        mModel.unCollect(articleId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Collect>() {
+        mModel.unCollect(articleId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers
+                .mainThread()).subscribe(new Observer<Collect>() {
             @Override
             public void onSubscribe(Disposable d) {
                 LogUtils.i();

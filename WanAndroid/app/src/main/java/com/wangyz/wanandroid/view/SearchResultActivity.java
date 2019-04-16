@@ -46,7 +46,8 @@ import me.itangqi.waveloadingview.WaveLoadingView;
  * @time 2019/1/28 17:28
  * @description SearchResultActivity
  */
-public class SearchResultActivity extends BaseActivity<Contract.SearchResultActivityView, SearchResultActivityPresenter> implements Contract.SearchResultActivityView {
+public class SearchResultActivity extends BaseActivity<Contract.SearchResultActivityView,
+        SearchResultActivityPresenter> implements Contract.SearchResultActivityView {
 
     @BindView(R.id.activity_search_result_refresh)
     SmartRefreshLayout mSmartRefreshLayout;
@@ -105,7 +106,8 @@ public class SearchResultActivity extends BaseActivity<Contract.SearchResultActi
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.addItemDecoration(new SpaceItemDecoration(mContext.getResources().getDimensionPixelSize(R.dimen.main_list_item_margin)));
+        mRecyclerView.addItemDecoration(new SpaceItemDecoration(mContext.getResources()
+                .getDimensionPixelSize(R.dimen.main_list_item_margin)));
 
         mAdapter = new SearchResultAdapter(this, mList);
         mRecyclerView.setAdapter(mAdapter);
@@ -142,6 +144,7 @@ public class SearchResultActivity extends BaseActivity<Contract.SearchResultActi
         stopAnim();
         mSmartRefreshLayout.finishRefresh();
         mSmartRefreshLayout.finishLoadMore();
+        mWaveLoadingView.setVisibility(View.GONE);
     }
 
     @TargetApi(Build.VERSION_CODES.N)
@@ -177,7 +180,8 @@ public class SearchResultActivity extends BaseActivity<Contract.SearchResultActi
         stopAnim();
         if (result != null) {
             if (result.getErrorCode() == 0) {
-                mList.stream().filter(a -> a.articleId == articleId).findFirst().get().collect = true;
+                mList.stream().filter(a -> a.articleId == articleId).findFirst().get().collect =
+                        true;
                 mAdapter.setList(mList);
             } else {
                 ToastUtils.showShort(mContext.getString(R.string.collect_failed));
@@ -191,7 +195,8 @@ public class SearchResultActivity extends BaseActivity<Contract.SearchResultActi
         stopAnim();
         if (result != null) {
             if (result.getErrorCode() == 0) {
-                mList.stream().filter(a -> a.articleId == articleId).findFirst().get().collect = false;
+                mList.stream().filter(a -> a.articleId == articleId).findFirst().get().collect =
+                        false;
                 mAdapter.setList(mList);
             } else {
                 ToastUtils.showShort(mContext.getString(R.string.uncollect_failed));

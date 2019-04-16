@@ -36,7 +36,8 @@ import me.itangqi.waveloadingview.WaveLoadingView;
  * @time 2019/1/28 16:49
  * @description SearchActivity
  */
-public class SearchActivity extends BaseActivity<Contract.SearchActivityView, SearchActivityPresenter> implements Contract.SearchActivityView {
+public class SearchActivity extends BaseActivity<Contract.SearchActivityView,
+        SearchActivityPresenter> implements Contract.SearchActivityView {
 
     @BindView(R.id.tag_hot_key)
     TagFlowLayout mTag;
@@ -83,6 +84,7 @@ public class SearchActivity extends BaseActivity<Contract.SearchActivityView, Se
     @Override
     public void onLoadFailed() {
         LogUtils.e();
+        mWaveLoadingView.setVisibility(View.GONE);
     }
 
     @TargetApi(Build.VERSION_CODES.N)
@@ -92,11 +94,13 @@ public class SearchActivity extends BaseActivity<Contract.SearchActivityView, Se
             mWaveLoadingView.setVisibility(View.GONE);
         }
         if (result != null && result.getErrorCode() == 0) {
-            mHotKeyList = result.getData().stream().map(k -> k.getName()).collect(Collectors.toList());
+            mHotKeyList = result.getData().stream().map(k -> k.getName()).collect(Collectors
+                    .toList());
             mTag.setAdapter(new TagAdapter<String>(mHotKeyList) {
                 @Override
                 public View getView(FlowLayout flowLayout, int i, String s) {
-                    TextView tv = (TextView) LayoutInflater.from(SearchActivity.this).inflate(R.layout.item_tree_tag, mTag, false);
+                    TextView tv = (TextView) LayoutInflater.from(SearchActivity.this).inflate(R
+                            .layout.item_tree_tag, mTag, false);
                     tv.setText(s);
                     return tv;
                 }

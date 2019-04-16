@@ -16,7 +16,8 @@ import io.reactivex.schedulers.Schedulers;
  * @time 2019/1/28 16:45
  * @description SearchActivityPresenter
  */
-public class SearchActivityPresenter extends BasePresenter<Contract.SearchActivityView> implements Contract.SearchActivityPresenter {
+public class SearchActivityPresenter extends BasePresenter<Contract.SearchActivityView>
+        implements Contract.SearchActivityPresenter {
 
     private Contract.SearchActivityModel mModel;
 
@@ -31,7 +32,8 @@ public class SearchActivityPresenter extends BasePresenter<Contract.SearchActivi
         } else {
             return;
         }
-        mModel.loadKeyWord().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<KeyWord>() {
+        mModel.loadKeyWord().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread
+                ()).subscribe(new Observer<KeyWord>() {
             @Override
             public void onSubscribe(Disposable d) {
                 LogUtils.i();
@@ -50,6 +52,9 @@ public class SearchActivityPresenter extends BasePresenter<Contract.SearchActivi
             @Override
             public void onError(Throwable e) {
                 LogUtils.e(e.getMessage());
+                if (isViewAttached()) {
+                    getView().onLoadFailed();
+                }
             }
 
             @Override
