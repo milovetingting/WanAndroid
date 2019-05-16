@@ -132,6 +132,7 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
         mSmartRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
             mPage++;
             mPresenter.load(mPage);
+            mEmpty.setVisibility(View.GONE);
         });
     }
 
@@ -182,7 +183,11 @@ public class CollectActivity extends BaseActivity<Contract.CollectActivityView, 
             mList.addAll(tempList);
             mAdapter.setList(mList);
         } else {
-            mEmpty.setVisibility(View.VISIBLE);
+            if (mList.size() > 0) {
+                mEmpty.setVisibility(View.GONE);
+            } else {
+                mEmpty.setVisibility(View.VISIBLE);
+            }
         }
     }
 

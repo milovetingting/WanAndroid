@@ -20,6 +20,7 @@ import com.wangyz.wanandroid.base.BaseActivity;
 import com.wangyz.wanandroid.bean.event.Event;
 import com.wangyz.wanandroid.bean.model.Login;
 import com.wangyz.wanandroid.contract.Contract;
+import com.wangyz.wanandroid.custom.CustomEditText;
 import com.wangyz.wanandroid.presenter.LoginActivityPresenter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -41,7 +42,7 @@ public class LoginActivity extends BaseActivity<Contract.LoginActivityView, Logi
     EditText mUsername;
 
     @BindView(R.id.password)
-    EditText mPassword;
+    CustomEditText mPassword;
 
     @BindView(R.id.login)
     Button mLogin;

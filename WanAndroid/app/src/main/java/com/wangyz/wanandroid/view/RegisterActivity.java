@@ -19,6 +19,7 @@ import com.wangyz.wanandroid.R;
 import com.wangyz.wanandroid.base.BaseActivity;
 import com.wangyz.wanandroid.bean.model.Register;
 import com.wangyz.wanandroid.contract.Contract;
+import com.wangyz.wanandroid.custom.CustomEditText;
 import com.wangyz.wanandroid.presenter.RegisterActivityPresenter;
 
 import butterknife.BindView;
@@ -29,7 +30,8 @@ import butterknife.OnClick;
  * @time 2019/1/24 10:27
  * @description RegisterActivity
  */
-public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView, RegisterActivityPresenter> implements Contract.RegisterActivityView {
+public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView,
+        RegisterActivityPresenter> implements Contract.RegisterActivityView {
 
     @BindView(R.id.back)
     ImageView mBack;
@@ -38,10 +40,10 @@ public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView
     EditText mUsername;
 
     @BindView(R.id.password)
-    EditText mPassword;
+    CustomEditText mPassword;
 
     @BindView(R.id.repassword)
-    EditText mRepassword;
+    CustomEditText mRepassword;
 
     @BindView(R.id.register)
     Button mRegister;
@@ -115,7 +117,8 @@ public class RegisterActivity extends BaseActivity<Contract.RegisterActivityView
 
     @OnClick(R.id.register)
     public void register() {
-        if (TextUtils.isEmpty(mUsername.getText()) || TextUtils.isEmpty(mPassword.getText()) || TextUtils.isEmpty(mRepassword.getText())) {
+        if (TextUtils.isEmpty(mUsername.getText()) || TextUtils.isEmpty(mPassword.getText()) ||
+                TextUtils.isEmpty(mRepassword.getText())) {
             ToastUtils.showShort(mContext.getString(R.string.complete_info));
             return;
         }
