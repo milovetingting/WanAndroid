@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'walle'
 
 android {
     compileSdkVersion 28
@@ -10,10 +11,20 @@ android {
         versionName "1.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release {
+            storeFile file("../../../../android.keystore")
+            storePassword "android"
+            keyAlias "android"
+            keyPassword "android"
+            v2SigningEnabled true
+        }
+    }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -65,4 +76,15 @@ dependencies {
     implementation(name: 'waveloadingview-0.3.4', ext: 'aar')
     implementation(name: 'flowlayout-lib-1.1.0', ext: 'aar')
     implementation files('libs/commons-lang3-3.8.1.jar')
+
+    implementation 'com.meituan.android.walle:library:1.1.6'
+}
+
+walle {
+    // 指定渠道包的输出路径
+    apkOutputFolder = new File("${project.buildDir}/outputs/channels")
+    // 定制渠道包的APK的文件名称
+    apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk';
+    // 渠道配置文件
+    channelFile = new File("${project.getProjectDir()}/channel")
 }

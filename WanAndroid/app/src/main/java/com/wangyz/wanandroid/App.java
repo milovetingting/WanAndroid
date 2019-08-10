@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatDelegate;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.Utils;
+import com.meituan.android.walle.WalleChannelReader;
 
 import org.litepal.LitePal;
 
@@ -26,6 +27,8 @@ public class App extends Application {
                 (ConstantValue.KEY_NIGHT_MODE, false);
         AppCompatDelegate.setDefaultNightMode(nightMode ? AppCompatDelegate.MODE_NIGHT_YES :
                 AppCompatDelegate.MODE_NIGHT_NO);
+        String channel = WalleChannelReader.getChannel(this.getApplicationContext());
+        LogUtils.d("channel:" + channel);
     }
 
 }
